@@ -1,0 +1,443 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B691A19C163E810F0053B398 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19B163E810F0053B398 /* UIKit.framework */; };
+		B691A19E163E810F0053B398 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19D163E810F0053B398 /* Foundation.framework */; };
+		B691A1A0163E810F0053B398 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19F163E810F0053B398 /* CoreGraphics.framework */; };
+		B691A1A6163E810F0053B398 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B691A1A4163E810F0053B398 /* InfoPlist.strings */; };
+		B691A1A8163E810F0053B398 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B691A1A7163E810F0053B398 /* main.m */; };
+		B691A1AC163E810F0053B398 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B691A1AB163E810F0053B398 /* AppDelegate.m */; };
+		B691A1AE163E810F0053B398 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B691A1AD163E810F0053B398 /* Default.png */; };
+		B691A1B0163E810F0053B398 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B691A1AF163E810F0053B398 /* Default@2x.png */; };
+		B691A1B2163E810F0053B398 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B691A1B1163E810F0053B398 /* Default-568h@2x.png */; };
+		B691A1BA163E810F0053B398 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A1B9163E810F0053B398 /* SenTestingKit.framework */; };
+		B691A1BB163E810F0053B398 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19B163E810F0053B398 /* UIKit.framework */; };
+		B691A1BC163E810F0053B398 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19D163E810F0053B398 /* Foundation.framework */; };
+		B691A1C4163E810F0053B398 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B691A1C2163E810F0053B398 /* InfoPlist.strings */; };
+		B691A1C7163E810F0053B398 /* IncantorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B691A1C6163E810F0053B398 /* IncantorTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B691A1BD163E810F0053B398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B691A18E163E810F0053B398 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B691A196163E810F0053B398;
+			remoteInfo = Incantor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B691A197163E810F0053B398 /* Incantor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Incantor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B691A19B163E810F0053B398 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B691A19D163E810F0053B398 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B691A19F163E810F0053B398 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B691A1A3163E810F0053B398 /* Incantor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Incantor-Info.plist"; sourceTree = "<group>"; };
+		B691A1A5163E810F0053B398 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B691A1A7163E810F0053B398 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B691A1A9163E810F0053B398 /* Incantor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Incantor-Prefix.pch"; sourceTree = "<group>"; };
+		B691A1AA163E810F0053B398 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B691A1AB163E810F0053B398 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B691A1AD163E810F0053B398 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		B691A1AF163E810F0053B398 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		B691A1B1163E810F0053B398 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B691A1B8163E810F0053B398 /* IncantorTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IncantorTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B691A1B9163E810F0053B398 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		B691A1C1163E810F0053B398 /* IncantorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IncantorTests-Info.plist"; sourceTree = "<group>"; };
+		B691A1C3163E810F0053B398 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B691A1C5163E810F0053B398 /* IncantorTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncantorTests.h; sourceTree = "<group>"; };
+		B691A1C6163E810F0053B398 /* IncantorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncantorTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B691A194163E810F0053B398 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B691A19C163E810F0053B398 /* UIKit.framework in Frameworks */,
+				B691A19E163E810F0053B398 /* Foundation.framework in Frameworks */,
+				B691A1A0163E810F0053B398 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B691A1B4163E810F0053B398 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B691A1BA163E810F0053B398 /* SenTestingKit.framework in Frameworks */,
+				B691A1BB163E810F0053B398 /* UIKit.framework in Frameworks */,
+				B691A1BC163E810F0053B398 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B691A18C163E810F0053B398 = {
+			isa = PBXGroup;
+			children = (
+				B691A1A1163E810F0053B398 /* Incantor */,
+				B691A1BF163E810F0053B398 /* IncantorTests */,
+				B691A19A163E810F0053B398 /* Frameworks */,
+				B691A198163E810F0053B398 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B691A198163E810F0053B398 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B691A197163E810F0053B398 /* Incantor.app */,
+				B691A1B8163E810F0053B398 /* IncantorTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B691A19A163E810F0053B398 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B691A19B163E810F0053B398 /* UIKit.framework */,
+				B691A19D163E810F0053B398 /* Foundation.framework */,
+				B691A19F163E810F0053B398 /* CoreGraphics.framework */,
+				B691A1B9163E810F0053B398 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B691A1A1163E810F0053B398 /* Incantor */ = {
+			isa = PBXGroup;
+			children = (
+				B691A1AA163E810F0053B398 /* AppDelegate.h */,
+				B691A1AB163E810F0053B398 /* AppDelegate.m */,
+				B691A1A2163E810F0053B398 /* Supporting Files */,
+			);
+			path = Incantor;
+			sourceTree = "<group>";
+		};
+		B691A1A2163E810F0053B398 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B691A1A3163E810F0053B398 /* Incantor-Info.plist */,
+				B691A1A4163E810F0053B398 /* InfoPlist.strings */,
+				B691A1A7163E810F0053B398 /* main.m */,
+				B691A1A9163E810F0053B398 /* Incantor-Prefix.pch */,
+				B691A1AD163E810F0053B398 /* Default.png */,
+				B691A1AF163E810F0053B398 /* Default@2x.png */,
+				B691A1B1163E810F0053B398 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B691A1BF163E810F0053B398 /* IncantorTests */ = {
+			isa = PBXGroup;
+			children = (
+				B691A1C5163E810F0053B398 /* IncantorTests.h */,
+				B691A1C6163E810F0053B398 /* IncantorTests.m */,
+				B691A1C0163E810F0053B398 /* Supporting Files */,
+			);
+			path = IncantorTests;
+			sourceTree = "<group>";
+		};
+		B691A1C0163E810F0053B398 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B691A1C1163E810F0053B398 /* IncantorTests-Info.plist */,
+				B691A1C2163E810F0053B398 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B691A196163E810F0053B398 /* Incantor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B691A1CA163E810F0053B398 /* Build configuration list for PBXNativeTarget "Incantor" */;
+			buildPhases = (
+				B691A193163E810F0053B398 /* Sources */,
+				B691A194163E810F0053B398 /* Frameworks */,
+				B691A195163E810F0053B398 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Incantor;
+			productName = Incantor;
+			productReference = B691A197163E810F0053B398 /* Incantor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B691A1B7163E810F0053B398 /* IncantorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B691A1CD163E810F0053B398 /* Build configuration list for PBXNativeTarget "IncantorTests" */;
+			buildPhases = (
+				B691A1B3163E810F0053B398 /* Sources */,
+				B691A1B4163E810F0053B398 /* Frameworks */,
+				B691A1B5163E810F0053B398 /* Resources */,
+				B691A1B6163E810F0053B398 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B691A1BE163E810F0053B398 /* PBXTargetDependency */,
+			);
+			name = IncantorTests;
+			productName = IncantorTests;
+			productReference = B691A1B8163E810F0053B398 /* IncantorTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B691A18E163E810F0053B398 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = Sagar;
+			};
+			buildConfigurationList = B691A191163E810F0053B398 /* Build configuration list for PBXProject "Incantor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B691A18C163E810F0053B398;
+			productRefGroup = B691A198163E810F0053B398 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B691A196163E810F0053B398 /* Incantor */,
+				B691A1B7163E810F0053B398 /* IncantorTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B691A195163E810F0053B398 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B691A1A6163E810F0053B398 /* InfoPlist.strings in Resources */,
+				B691A1AE163E810F0053B398 /* Default.png in Resources */,
+				B691A1B0163E810F0053B398 /* Default@2x.png in Resources */,
+				B691A1B2163E810F0053B398 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B691A1B5163E810F0053B398 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B691A1C4163E810F0053B398 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B691A1B6163E810F0053B398 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B691A193163E810F0053B398 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B691A1A8163E810F0053B398 /* main.m in Sources */,
+				B691A1AC163E810F0053B398 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B691A1B3163E810F0053B398 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B691A1C7163E810F0053B398 /* IncantorTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B691A1BE163E810F0053B398 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B691A196163E810F0053B398 /* Incantor */;
+			targetProxy = B691A1BD163E810F0053B398 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B691A1A4163E810F0053B398 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B691A1A5163E810F0053B398 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B691A1C2163E810F0053B398 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B691A1C3163E810F0053B398 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B691A1C8163E810F0053B398 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B691A1C9163E810F0053B398 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B691A1CB163E810F0053B398 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Incantor/Incantor-Prefix.pch";
+				INFOPLIST_FILE = "Incantor/Incantor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B691A1CC163E810F0053B398 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Incantor/Incantor-Prefix.pch";
+				INFOPLIST_FILE = "Incantor/Incantor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		B691A1CE163E810F0053B398 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Incantor.app/Incantor";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Incantor/Incantor-Prefix.pch";
+				INFOPLIST_FILE = "IncantorTests/IncantorTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		B691A1CF163E810F0053B398 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Incantor.app/Incantor";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Incantor/Incantor-Prefix.pch";
+				INFOPLIST_FILE = "IncantorTests/IncantorTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B691A191163E810F0053B398 /* Build configuration list for PBXProject "Incantor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B691A1C8163E810F0053B398 /* Debug */,
+				B691A1C9163E810F0053B398 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B691A1CA163E810F0053B398 /* Build configuration list for PBXNativeTarget "Incantor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B691A1CB163E810F0053B398 /* Debug */,
+				B691A1CC163E810F0053B398 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B691A1CD163E810F0053B398 /* Build configuration list for PBXNativeTarget "IncantorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B691A1CE163E810F0053B398 /* Debug */,
+				B691A1CF163E810F0053B398 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B691A18E163E810F0053B398 /* Project object */;
+}
