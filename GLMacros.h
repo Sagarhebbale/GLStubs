@@ -9,6 +9,11 @@
 #ifndef Incantor_GLMacros_h
 #define Incantor_GLMacros_h
 
-
+typedef enum{
+    kGLTriangleStrip = 0,
+    kGLTrianles,
+    KGLTriangleFan,
+    
+}GLTopology;
 
 #endif

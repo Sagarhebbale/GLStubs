@@ -9,19 +9,26 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
+@synthesize m_window;
 
 - (void)dealloc
 {
-    [_window release];
+    [m_window release];
+    [m_viewController release];
     [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    
+    
+    m_window = [[UIWindow alloc] initWithFrame:screenBounds];
+    m_viewController = [[GLViewController alloc] init];
+    [m_window setRootViewController:m_viewController];
+    //[m_window addSubview:m_viewController.view];
+    [m_window makeKeyAndVisible];
+    
     return YES;
 }
 

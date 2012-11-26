@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLView.h"
 
-@interface GLViewController : UIViewController
+@interface GLViewController : UIViewController{
+    
+    GLView *mainGLView;
+}
+
+@property(nonatomic, retain)GLView *mainGLView;
 
 @end

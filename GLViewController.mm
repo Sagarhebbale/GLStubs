@@ -10,9 +10,11 @@
 
 @interface GLViewController ()
 
+
 @end
 
 @implementation GLViewController
+@synthesize mainGLView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,9 +25,14 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CGRect mainScreenBounds = [[UIScreen mainScreen] bounds];
+    mainGLView = [[GLView alloc] initWithFrame:mainScreenBounds];
+    self.view = mainGLView;
 	// Do any additional setup after loading the view.
 }
 
