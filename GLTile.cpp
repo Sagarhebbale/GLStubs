@@ -25,7 +25,7 @@ Vertex GLTile:: vertexMake(vec3 position, vec4 color){
 }
 
 GLTile GLTile::createTile(float size , vec4 color , GLTopology argTopology){
-    this->tileIndices.resize(4);
+    this->vertexIndices.resize(4);
     firstVertex = vertexMake(vec3(0 , size , 0), color);
     printf("\nFirst vertex x : %f , y: %f , z:%f",firstVertex.Position.x , firstVertex.Position.y ,firstVertex.Position.z);
     secondVertex = vertexMake(vec3(0 , 0, 0), color);
@@ -39,12 +39,12 @@ GLTile GLTile::createTile(float size , vec4 color , GLTopology argTopology){
     argTopology = topology;
     switch (topology) {
         case kGLTriangleStrip:
-            this->tileIndices = {0 , 1 , 2 , 3};
+            this->vertexIndices = {0 , 1 , 2 , 3};
             break;
         case kGLTrianles:
-            this->tileIndices = {0 , 1 , 2 , 1 , 2 , 3};
+            this->vertexIndices = {0 , 1 , 2 , 1 , 2 , 3};
         default:
-            this->tileIndices = {0 , 1 , 2 , 3};
+            this->vertexIndices = {0 , 1 , 2 , 3};
             break;
     }
     return *this;

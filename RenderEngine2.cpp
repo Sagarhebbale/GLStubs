@@ -14,7 +14,7 @@
 #define STRINGIFY(A)  #A
 #include "/Users/moveablecode/Desktop/Incantor.git/Incantor /Shaders/Simplevert.glsl"
 #include "/Users/moveablecode/Desktop/Incantor.git/Incantor /Shaders/Simplefrag.glsl"
-#include "GLTileManager.hpp"
+#include "GLPlane.hpp"
 #include "GLMacros.h"
 
 
@@ -45,8 +45,8 @@ public:
 private:
     GLuint BuildShader(const char* source, GLenum shaderType) const;
     GLuint BuildProgram(const char* vShader, const char* fShader) const;
-    GLTileManager tileManager;
-    std::vector<vector<GLTile>> plane;
+   
+    GLPlane plane;
     Animation m_animation;
     GLuint m_simpleProgram;
     GLuint m_framebuffer;
@@ -81,16 +81,10 @@ void RenderingEngine2::Initialize(int width, int height)
     float leftBounds , topBounds;
     leftBounds = -4.15;
     topBounds = 6.3;
-    //m_pivotPoint = ivec2(width / 2, height / 2);
-    /*tileManager = GLTileManager();
+    m_pivotPoint = ivec2(width / 2, height / 2);
     tileSize = 0.5;
-    tileManager.initialize(tileSize);
-    plane = tileManager.createPlane(vec2(leftBounds ,topBounds),abs(2*leftBounds), abs(2*topBounds));*/
-    GLTile tile;
-    tile = tile.createTile(3, vec4(1,0,0,1), kGLTriangleStrip);
-    
-    
-    
+    GLPlane plane(0.5 , 10);
+    plane = plane.createPlaneAt(0.5, vec2( 0 , 0));
     // Create the depth buffer.
     glGenRenderbuffers(1, &m_depthRenderbuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, m_depthRenderbuffer);
@@ -141,17 +135,17 @@ void RenderingEngine2::Initialize(int width, int height)
     glGenBuffers(1, &m_vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER,
-                 tile.tile.size() * sizeof(tile.tile[0]),
-                 &tile.tile[0],
+                 plane.plane.size() * sizeof(plane.plane.front().tileStrip.front().tile.size()),
+                 &plane.plane.front().tileStrip.front().tile[0],
                  GL_STATIC_DRAW);
     
     // Create the VBO for the indices.
-    glGenBuffers(1, &m_indexBuffer);
+    /*glGenBuffers(1, &m_indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,
                  tile.tileIndices.size()  * sizeof(tile.tileIndices[0]),
                  &tile.tileIndices[0],
-                 GL_STATIC_DRAW);
+                 GL_STATIC_DRAW);*/
    
 }
 
@@ -309,12 +303,12 @@ void RenderingEngine2::Render() const
     glEnableVertexAttribArray(positionSlot);
     
     const GLvoid* bodyOffset = 0;
-    
-    
     glEnableVertexAttribArray(colorSlot);
     glDrawElements(GL_TRIANGLE_STRIP, 3, GL_UNSIGNED_BYTE, bodyOffset);
-    glDisableVertexAttribArray(colorSlot);
-    glVertexAttrib4f(colorSlot, 1, 1, 1, 1);
+    bodyOffset = (GLvoid *)1;
+    glDrawElements(GL_TRIANGLE_STRIP, 3, GL_UNSIGNED_BYTE,bodyOffset );
+    //glDisableVertexAttribArray(colorSlot);
+    
     //glDrawElements(GL_TRIANGLES, m_diskIndexCount, GL_UNSIGNED_BYTE, diskOffset);*/
     
     glDisableVertexAttribArray(positionSlot);

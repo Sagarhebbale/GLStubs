@@ -26,7 +26,7 @@ public:
     vec4 tileColor;
     vector<Vertex> tile;
     GLTopology topology;
-    vector<char> tileIndices;
+    vector<char> vertexIndices;
     struct GLTile* makeTile();
     Vertex firstVertex , secondVertex , thirdVertex , fourthVertex;
     GLTile createTile(float size, vec4 color , GLTopology topology);

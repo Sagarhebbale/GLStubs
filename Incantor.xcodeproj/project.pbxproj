@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B602A4361640FFEB0007152E /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B602A4351640FFEB0007152E /* GLView.mm */; };
+		B650E8941664D0850003E312 /* GLStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B650E8921664D0850003E312 /* GLStrip.cpp */; };
+		B650E898166606FE0003E312 /* GLPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B650E896166606FE0003E312 /* GLPlane.cpp */; };
 		B6885CE61653720C009E29FF /* GLTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6885CE41653720C009E29FF /* GLTile.cpp */; };
 		B691A19C163E810F0053B398 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19B163E810F0053B398 /* UIKit.framework */; };
 		B691A19E163E810F0053B398 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19D163E810F0053B398 /* Foundation.framework */; };
@@ -48,6 +50,10 @@
 		B602A4351640FFEB0007152E /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
 		B602A437164107270007152E /* IRenderingEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IRenderingEngine.hpp; sourceTree = "<group>"; };
 		B613A7E7166345D200A0767D /* GLMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLMacros.h; sourceTree = "<group>"; };
+		B650E8921664D0850003E312 /* GLStrip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLStrip.cpp; sourceTree = "<group>"; };
+		B650E8931664D0850003E312 /* GLStrip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLStrip.hpp; sourceTree = "<group>"; };
+		B650E896166606FE0003E312 /* GLPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLPlane.cpp; sourceTree = "<group>"; };
+		B650E897166606FE0003E312 /* GLPlane.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLPlane.hpp; sourceTree = "<group>"; };
 		B6885CE41653720C009E29FF /* GLTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLTile.cpp; sourceTree = "<group>"; };
 		B6885CE51653720C009E29FF /* GLTile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLTile.hpp; sourceTree = "<group>"; };
 		B6885CE816537F71009E29FF /* GLMath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLMath.hpp; sourceTree = "<group>"; };
@@ -124,6 +130,8 @@
 		B6885CFA165CD038009E29FF /* GLStuff */ = {
 			isa = PBXGroup;
 			children = (
+				B650E8921664D0850003E312 /* GLStrip.cpp */,
+				B650E8931664D0850003E312 /* GLStrip.hpp */,
 				B6885CE816537F71009E29FF /* GLMath.hpp */,
 				B6885CE41653720C009E29FF /* GLTile.cpp */,
 				B6885CE51653720C009E29FF /* GLTile.hpp */,
@@ -131,6 +139,8 @@
 				B6936543164B99F900263411 /* GLTileManager.hpp */,
 				B693653D164926EE00263411 /* MyMath.hpp */,
 				B613A7E7166345D200A0767D /* GLMacros.h */,
+				B650E896166606FE0003E312 /* GLPlane.cpp */,
+				B650E897166606FE0003E312 /* GLPlane.hpp */,
 			);
 			name = GLStuff;
 			sourceTree = "<group>";
@@ -357,6 +367,8 @@
 				B693652D16483C2B00263411 /* GLViewController.mm in Sources */,
 				B6936544164B99F900263411 /* GLTileManager.cpp in Sources */,
 				B6885CE61653720C009E29FF /* GLTile.cpp in Sources */,
+				B650E8941664D0850003E312 /* GLStrip.cpp in Sources */,
+				B650E898166606FE0003E312 /* GLPlane.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

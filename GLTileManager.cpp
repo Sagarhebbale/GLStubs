@@ -27,6 +27,7 @@ vector<vector<GLTile>> GLTileManager::createPlane(vec2 origin, float width , flo
     int numberOfStrips = (int)((height/tileSize) +1);
     printf("Number of strips : %d", numberOfStrips);
     plane.resize(numberOfStrips);
+    stripIndices.resize(numberOfStrips);
     float xPos = origin.x;
     float yPos = origin.y;
     int i =0;
@@ -35,6 +36,8 @@ vector<vector<GLTile>> GLTileManager::createPlane(vec2 origin, float width , flo
             vector<GLTile>strip;
             printf("\nStrip number : %d",i);
             strip = this->createTileStrip(width, vec2(xPos , yPos));
+            stripIndices.at(i) = i;
+            printf("Strip Index : %d",stripIndices.at(i));
             yPos -=  tileSize;
             plane.at(i) = strip;
         }
@@ -42,6 +45,7 @@ vector<vector<GLTile>> GLTileManager::createPlane(vec2 origin, float width , flo
             break;
        
     }
+    this->generatePlaneVertexIndices();
     return plane;
 }
 
