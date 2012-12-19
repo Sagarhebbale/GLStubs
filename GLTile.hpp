@@ -19,23 +19,39 @@
 using namespace std;
 #define defaultTileSize 20
 #define defaultTilColor vec4(1,0,0,1)
+#define tileVertexCount 4;
+
+typedef enum{
+    kTileColorModePlain,
+    kTileColorModeMixed,
+}TileColorMode;
 
 class GLTile {
 public:
+    //tile properties
+    vec3 origin;
     float tileSize;
-    vec4 tileColor;
-    vector<Vertex> tile;
-    GLTopology topology;
+    vector<Vertex> vertices;
+    GLTopology topology;   //indicates the openGLTopology to draw the tile in
     vector<char> vertexIndices;
-    struct GLTile* makeTile();
+    TileColorMode colorMode;   //indicates the mode of coloring of vertices
+    bool needsVertexData;  
     Vertex firstVertex , secondVertex , thirdVertex , fourthVertex;
-    GLTile createTile(float size, vec4 color , GLTopology topology);
-    GLTile setTileColor(GLTile tile , vec4 color);
-    GLTile setTileOrigin(GLTile tile , vec3 origin);
+    struct GLTile* makeTile();
+    void setColorMode(TileColorMode argMode);
+    GLTile createPlainTile(float size, vec4 color , GLTopology argTopology);
+    GLTile createTileWithMixedColor(float tileSize, vector<vec4> vertexColors, GLTopology topology);
+    void setOrigin(vec3 origin);
+    void setNeedsVertexData(bool needsData);
+    ~GLTile();
+private:
+    void setVertices(float size , vector<vec4> colors);
+    void setNullVertices();
+    void reloadVertexData();
     Vertex vertexMake(vec3 position, vec4 color);
     
     
-   };
+};
 
 
 #endif /* defined(__Incantor__GLTile__) */

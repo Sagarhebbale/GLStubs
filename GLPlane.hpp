@@ -19,15 +19,13 @@ class GLPlane{
         planeHeight = argHeight;
         planeWidth = argWidth;
        }
-    ~GLPlane(){
-        free(&plane);
-    }
     float planeWidth;
     float planeHeight;
     float tileSize;
     vector<GLStrip> plane;
     vector<char> stripIndices;
     GLPlane createPlaneAt(float argTileSize , vec2 origin);
+    vector<char> getVertexIndicesForThisPlane();
 };
 
 #endif /* defined(__Incantor__GLPlane__) */

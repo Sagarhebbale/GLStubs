@@ -8,7 +8,7 @@
 
 #include "GLPlane.hpp"
 
-GLPlane GLPlane::createPlaneAt(float argTileSize , vec2 origin){
+/*GLPlane GLPlane::createPlaneAt(float argTileSize , vec2 origin){
     int numberOfStrips = (int)((planeHeight/tileSize) +1);
     printf("Number of strips : %d", numberOfStrips);
     plane.resize(numberOfStrips);
@@ -18,7 +18,7 @@ GLPlane GLPlane::createPlaneAt(float argTileSize , vec2 origin){
     int i =0;
     for(i =0; i<numberOfStrips;i++){
         if(yPos <= planeHeight){
-            GLStrip strip(kStriporientationHorizontal , 10 , kGLTriangleStrip);
+            //GLStrip strip(kStriporientationHorizontal , 10 , kGLTriangleStrip);
             printf("\nStrip number : %d",i);
             strip = strip.createTileStrip(planeWidth, vec2(xPos , yPos));
             stripIndices.at(i) = i;
@@ -33,4 +33,4 @@ GLPlane GLPlane::createPlaneAt(float argTileSize , vec2 origin){
     }
     
     return *this;
-}
+}*/

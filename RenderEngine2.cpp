@@ -78,13 +78,14 @@ RenderingEngine2::RenderingEngine2() : m_rotationAngle(0), m_scale(1), m_transla
 
 void RenderingEngine2::Initialize(int width, int height)
 {   //create and initialize the tile manager
-    float leftBounds , topBounds;
-    leftBounds = -4.15;
-    topBounds = 6.3;
-    m_pivotPoint = ivec2(width / 2, height / 2);
-    tileSize = 0.5;
-    GLPlane plane(0.5 , 10);
-    plane = plane.createPlaneAt(0.5, vec2( 0 , 0));
+    GLStrip strip(kStriporientationHorizontal , kGLTriangleStrip);
+    strip.setDrawMode(kmodeStripCount);
+    strip.setTileSize(2);
+    strip.setStripCount(2);
+    strip.setStriporigin(vec3(0,0,0));
+    vector<char> indices = {0 , 1 , 2 ,3 , 4 , 5};
+    
+    
     // Create the depth buffer.
     glGenRenderbuffers(1, &m_depthRenderbuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, m_depthRenderbuffer);
@@ -132,20 +133,22 @@ void RenderingEngine2::Initialize(int width, int height)
     glUniformMatrix4fv(projectionUniform, 1, 0,
                        projectionMatrix.Pointer());
     
-    glGenBuffers(1, &m_vertexBuffer);
+   glGenBuffers(1, &m_vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER,
-                 plane.plane.size() * sizeof(plane.plane.front().tileStrip.front().tile.size()),
-                 &plane.plane.front().tileStrip.front().tile[0],
+                 strip.vertices.size()*sizeof(strip.vertices[0]),
+                 &strip.vertices[0],
                  GL_STATIC_DRAW);
     
+    
     // Create the VBO for the indices.
-    /*glGenBuffers(1, &m_indexBuffer);
+    glGenBuffers(1, &m_indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-                 tile.tileIndices.size()  * sizeof(tile.tileIndices[0]),
-                 &tile.tileIndices[0],
-                 GL_STATIC_DRAW);*/
+                 indices.size() * sizeof(indices[0]),
+                 &indices[0],
+                 GL_STATIC_DRAW);
+    
    
 }
 
@@ -291,7 +294,7 @@ void RenderingEngine2::Render() const
     mat4 modelviewMatrix = scale*rotation * translation;
     glUniformMatrix4fv(modelviewUniform, 1, 0, modelviewMatrix.Pointer());
     GLsizei stride = sizeof(Vertex);
-    const GLvoid* colorOffset = (GLvoid*) sizeof(vec3);
+    const GLvoid* colorOffset = (GLvoid*) sizeof(vec4);
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUniformMatrix4fv(modelviewUniform, 1, 0, modelviewMatrix.Pointer());
@@ -304,10 +307,8 @@ void RenderingEngine2::Render() const
     
     const GLvoid* bodyOffset = 0;
     glEnableVertexAttribArray(colorSlot);
-    glDrawElements(GL_TRIANGLE_STRIP, 3, GL_UNSIGNED_BYTE, bodyOffset);
-    bodyOffset = (GLvoid *)1;
-    glDrawElements(GL_TRIANGLE_STRIP, 3, GL_UNSIGNED_BYTE,bodyOffset );
-    //glDisableVertexAttribArray(colorSlot);
+    glDrawElements(GL_TRIANGLE_STRIP, 6, GL_UNSIGNED_BYTE, bodyOffset);
+    glDisableVertexAttribArray(colorSlot);
     
     //glDrawElements(GL_TRIANGLES, m_diskIndexCount, GL_UNSIGNED_BYTE, diskOffset);*/
     

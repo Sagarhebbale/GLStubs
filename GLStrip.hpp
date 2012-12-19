@@ -17,27 +17,53 @@ typedef enum{
     kStriporientationHorizontal,
 }StripOrientation;
 
+typedef enum{
+    kmodeStripCount,
+    kmodeStripWidth
+}StripDrawMode;
+
 class GLStrip{
     public :
-    GLStrip(StripOrientation argOrientation = kStriporientationHorizontal , float width = 10 , GLTopology argStripTopology = kGLTriangleStrip){
-        
+    GLStrip(StripOrientation argOrientation = kStriporientationHorizontal , GLTopology argStripTopology = kGLTriangleStrip){
         orientation = argOrientation;
-        width = stripWidth;
         stripTopology = argStripTopology;
-    }
-    ~GLStrip(){
-        free(&tileStrip);
         }
-    vector<GLTile> tileStrip;
-    vector<char> tileIndicesInStrip;
-    static int stripCount;
+   
+    vector<GLTile> tiles;
+    vector<Vertex> vertices;
+    vector<char> vertexIndices;
+    vector<char> tileIndices;
+    vec3 stripOrigin;
     float stripWidth;
     float tileSize;
+    int tileCount;
     StripOrientation orientation;
+    StripDrawMode drawMode;
     GLTopology stripTopology;
+    TileColorMode tileColorMode;
+    vec4 tileColor;
+    vec4 altTileColor;
+    vector<vec4> tileVertexColors;
+    bool needsData;
+    void setDrawMode(StripDrawMode argDrawMode);
+    void setNeedsData(bool argNeedsData);
+    void setStripCount(int count);
+    void setStripWidth(float width);
+    void setTileSize(float size);
+    void setStriporigin(vec3 argOrigin);
+    void setTileColorMode(TileColorMode argColorMode);
     GLStrip createTileStrip(float stripWidth, vec2 origin);
     private:
-    float numberOfTiles;
+    void setStripForStripWidth();
+    void setStripForStripCount();
+    void setNullTiles();
+    void setNullVertices();
+    void draw();
+    void setVertices();
+    void setVertexIndices();
+    void fillStripColors();
+    void printVertices(vector<Vertex> vert);
+    
     
 };
 

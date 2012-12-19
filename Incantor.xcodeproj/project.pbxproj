@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B602A4361640FFEB0007152E /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B602A4351640FFEB0007152E /* GLView.mm */; };
-		B650E8941664D0850003E312 /* GLStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B650E8921664D0850003E312 /* GLStrip.cpp */; };
-		B650E898166606FE0003E312 /* GLPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B650E896166606FE0003E312 /* GLPlane.cpp */; };
+		B61EB2B6167E305100B4AE8E /* GLStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B61EB2B4167E305100B4AE8E /* GLStrip.cpp */; };
 		B6885CE61653720C009E29FF /* GLTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6885CE41653720C009E29FF /* GLTile.cpp */; };
 		B691A19C163E810F0053B398 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19B163E810F0053B398 /* UIKit.framework */; };
 		B691A19E163E810F0053B398 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19D163E810F0053B398 /* Foundation.framework */; };
@@ -32,7 +31,6 @@
 		B69365251647C70400263411 /* Simplefrag.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B69365231647C70400263411 /* Simplefrag.glsl */; };
 		B69365261647C70400263411 /* Simplevert.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B69365241647C70400263411 /* Simplevert.glsl */; };
 		B693652D16483C2B00263411 /* GLViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B693652C16483C2B00263411 /* GLViewController.mm */; };
-		B6936544164B99F900263411 /* GLTileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6936542164B99F900263411 /* GLTileManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,10 +48,8 @@
 		B602A4351640FFEB0007152E /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
 		B602A437164107270007152E /* IRenderingEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IRenderingEngine.hpp; sourceTree = "<group>"; };
 		B613A7E7166345D200A0767D /* GLMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLMacros.h; sourceTree = "<group>"; };
-		B650E8921664D0850003E312 /* GLStrip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLStrip.cpp; sourceTree = "<group>"; };
-		B650E8931664D0850003E312 /* GLStrip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLStrip.hpp; sourceTree = "<group>"; };
-		B650E896166606FE0003E312 /* GLPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLPlane.cpp; sourceTree = "<group>"; };
-		B650E897166606FE0003E312 /* GLPlane.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLPlane.hpp; sourceTree = "<group>"; };
+		B61EB2B4167E305100B4AE8E /* GLStrip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLStrip.cpp; sourceTree = "<group>"; };
+		B61EB2B5167E305100B4AE8E /* GLStrip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLStrip.hpp; sourceTree = "<group>"; };
 		B6885CE41653720C009E29FF /* GLTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLTile.cpp; sourceTree = "<group>"; };
 		B6885CE51653720C009E29FF /* GLTile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLTile.hpp; sourceTree = "<group>"; };
 		B6885CE816537F71009E29FF /* GLMath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLMath.hpp; sourceTree = "<group>"; };
@@ -88,8 +84,6 @@
 		B693652B16483C2B00263411 /* GLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLViewController.h; sourceTree = "<group>"; };
 		B693652C16483C2B00263411 /* GLViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLViewController.mm; sourceTree = "<group>"; };
 		B693653D164926EE00263411 /* MyMath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MyMath.hpp; sourceTree = "<group>"; };
-		B6936542164B99F900263411 /* GLTileManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLTileManager.cpp; sourceTree = "<group>"; };
-		B6936543164B99F900263411 /* GLTileManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLTileManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,17 +124,13 @@
 		B6885CFA165CD038009E29FF /* GLStuff */ = {
 			isa = PBXGroup;
 			children = (
-				B650E8921664D0850003E312 /* GLStrip.cpp */,
-				B650E8931664D0850003E312 /* GLStrip.hpp */,
+				B61EB2B4167E305100B4AE8E /* GLStrip.cpp */,
+				B61EB2B5167E305100B4AE8E /* GLStrip.hpp */,
 				B6885CE816537F71009E29FF /* GLMath.hpp */,
 				B6885CE41653720C009E29FF /* GLTile.cpp */,
 				B6885CE51653720C009E29FF /* GLTile.hpp */,
-				B6936542164B99F900263411 /* GLTileManager.cpp */,
-				B6936543164B99F900263411 /* GLTileManager.hpp */,
 				B693653D164926EE00263411 /* MyMath.hpp */,
 				B613A7E7166345D200A0767D /* GLMacros.h */,
-				B650E896166606FE0003E312 /* GLPlane.cpp */,
-				B650E897166606FE0003E312 /* GLPlane.hpp */,
 			);
 			name = GLStuff;
 			sourceTree = "<group>";
@@ -365,10 +355,8 @@
 				B69365041644D99B00263411 /* RenderEngine1.cpp in Sources */,
 				B69365111646414600263411 /* RenderEngine2.cpp in Sources */,
 				B693652D16483C2B00263411 /* GLViewController.mm in Sources */,
-				B6936544164B99F900263411 /* GLTileManager.cpp in Sources */,
 				B6885CE61653720C009E29FF /* GLTile.cpp in Sources */,
-				B650E8941664D0850003E312 /* GLStrip.cpp in Sources */,
-				B650E898166606FE0003E312 /* GLPlane.cpp in Sources */,
+				B61EB2B6167E305100B4AE8E /* GLStrip.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
