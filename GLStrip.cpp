@@ -8,7 +8,7 @@
 
 #include "GLStrip.hpp"
 
-
+//
 
 void GLStrip::setDrawMode(StripDrawMode argDrawMode){
     this->drawMode = argDrawMode;
@@ -78,8 +78,12 @@ void GLStrip::setStripWidth(float width){
 void GLStrip::setStripCount(int count){
     if(this->drawMode == kmodeStripCount){
         if(this->tileSize != 0 ){
+            if(count ==1)
+                cout<<"cannot generate a strip using a single tile. Consider rendering a tile instead";
+            
             this->tileCount = count;
             this->stripWidth = count*(this->tileSize);
+            this->tiles.resize(count);
         }
         else{
             cout<<"Set tile size before setting strip count";
@@ -96,48 +100,98 @@ void GLStrip::setNullTiles(){
         
     }
     if(this->drawMode == kmodeStripWidth){
-        int count = (int)((this->stripWidth/this->tileSize) + 1);
+        int count = (int)((this->stripWidth/this->tileSize));
         this->tiles.resize(count);
         
     }
 }
+
 void GLStrip::setVertices(){
     if(this->tiles.empty() == 0){
         GLTile currentTile;
         vector<Vertex> stripVertices;
-        stripVertices.resize(tiles.size()*2 +1);
+        stripVertices.resize(2*(tiles.size() - 1) + 4);
         int j;
         j=0;
-        for(int i=0;i<this->tiles.size();i++){
-            if(i == tiles.size() -1){
+        int i;
+        for(i=0;i<this->tiles.size();i++){
+            currentTile = this->tiles.at(i);
+            if(i == this->tiles.size() - 1){
+                stripVertices.at(j) = currentTile.firstVertex;
+                j++;
+                stripVertices.at(j) = currentTile.secondVertex;
                 j++;
                 stripVertices.at(j) = currentTile.thirdVertex;
                 j++;
                 stripVertices.at(j) = currentTile.fourthVertex;
                 break;
             }
-            currentTile = tiles.at(i);
             stripVertices.at(j) = currentTile.firstVertex;
             j++;
             stripVertices.at(j) = currentTile.secondVertex;
-            
             j++;
-        }
+            }
         this->vertices = stripVertices;
+        this->setVertexIndices();
        }
+    
     else{
         cout<<"Fatal error, api cannot determine point of error";
     }
 }
 
+void GLStrip::setVertexIndices(){
+    vertexIndices.resize(this->vertices.size());
+    for(int i =0;i < this->vertices.size();i++){
+        this->vertexIndices.at(i) = i;
+    }
+    this->printVertexIndices();
+
+}
+
+vector<Vertex> GLStrip::getVertices(){
+    if(this->needsData == 0 && this->vertices.empty() == 0){
+        return this->vertices;
+    }
+    else{
+        vector<Vertex> nullVertices;
+        return nullVertices;
+    }
+        
+    
+}
+
+vector<char> GLStrip::getVertexIndices(){
+    if(this->needsData == 0 && this->vertices.empty() == 0){
+        return this->vertexIndices;
+    }
+    else{
+        vector<char> nullIndices;
+        return nullIndices;
+    }
+    
+}
+
+void GLStrip::printVertexIndices(){
+    if(this->vertexIndices.empty() == 0){
+        for(int i = 0; i< this->vertexIndices.size(); i++){
+            printf("\n VertexIndex : %d",this->vertexIndices.at(i));
+        }
+    }
+    else{
+        cout<<"set vertices to print vertex indices";
+    }
+}
 void GLStrip::draw(){
     if(this->tileColorMode != kTileColorModeMixed && this->tileColorMode != kTileColorModePlain)
         this->tileColorMode = kTileColorModePlain;
     float currentX , currentY , currentZ;
+    int count = 0;
     currentX = this->stripOrigin.x;
     currentY = this->stripOrigin.y;
     currentZ = this->stripOrigin.z;
     bool switchColor = 0;
+    
     for(int i =0; i<this->tiles.size();i++){
         GLTile newTile;
         vec4 color;
@@ -146,39 +200,31 @@ void GLStrip::draw(){
             switchColor = 1;
         }
         else{
-            color = altTileColor;
+            color = this->altTileColor;
             switchColor = 0;
         }
-        
-        if(this->orientation == kStriporientationHorizontal)
-            currentX = this->stripOrigin.x + i*(this->tileSize);
-        else
-            currentY = this->stripOrigin.y - i*(this->tileSize);
-        
+        currentX = this->stripOrigin.x + i*(this->tileSize);
         if(this->drawMode == kmodeStripCount){
-            if(currentX > tileCount*tileSize)
+            if(i == (this->tileCount) )
                 break;
         }
-        if(this->drawMode == kmodeStripWidth){
-            if(currentX > stripWidth)
-                break;
-        }
-        else{
-            newTile.setColorMode(this->tileColorMode);
-            if(this->tileColorMode == kTileColorModePlain){
-                newTile = newTile.createPlainTile(this->tileSize, color, this->stripTopology)
-                ;
-            }
-            else if(this->tileColorMode == kTileColorModeMixed){
-                newTile = newTile.createTileWithMixedColor(this->tileSize, this->tileVertexColors, this->stripTopology);
-            }
-            vec3 pos = vec3(currentX , currentY , currentZ);
-            newTile.setOrigin(pos);
-            this->tiles.at(i) = newTile;
-        }
+        
+               
+        newTile.setColorMode(this->tileColorMode);
+        newTile = newTile.createPlainTile(this->tileSize, color, this->stripTopology);
+        count++;
+        vec3 pos = vec3(currentX , currentY , currentZ);
+        printf("\n$$$n x : %f y : %f z : %f",pos.x,pos.y,pos.z);
+        newTile.setOrigin(pos);
+        this->tiles.at(i) = newTile;
+        
+        
+        
+        
     }
+    printf("\nCount : %d", count);
     this->setVertices();
-    this->printVertices(this->vertices);
+    //this->printVertices(this->vertices);
     
 }
 void GLStrip::printVertices(std::vector<Vertex> vert){
@@ -190,103 +236,6 @@ void GLStrip::printVertices(std::vector<Vertex> vert){
     }
 }
 
-
-/*void GLStrip::setStripForStripWidth(){
- float currentX = stripOrigin.x;
- float currentY = stripOrigin.y;
- float currentZ = stripOrigin.z;
- numberOfTiles = (stripWidth/tileSize) +1;
- this->tileStrip.resize(numberOfTiles);
- this->tileIndicesInStrip.resize(numberOfTiles);
- bool switchColorBetweenTiles = 0;
- for(int i = 0 ; i<this->tileStrip.size() ; i++){
- GLTile tile;
- printf("\n****TILE START***");
- vec4 color;
- if (switchColorBetweenTiles == 0) {
- color = vec4(0,1,0,1);
- switchColorBetweenTiles = 1;
- }
- else{
- color = vec4(0,0,1,1);
- switchColorBetweenTiles = 0;
- }
- currentX = this->stripOrigin.x + i*(this->tileSize);
- if(currentX > stripWidth)
- break;
- if(currentX <= stripWidth/2){
- //tile = tile.createTile(tileSize, color , kGLTriangleStrip);
- vec3 tilePosition = vec3(currentX,currentY,currentZ);
- 
- printf("\n x : %f  y : %f  z : %f  count : %d" , tilePosition.x,tilePosition.y,tilePosition.z , i);
- 
- tile = tile.setTileOrigin(tile,tilePosition );
- this->tileStrip.at(i) = tile;
- this->tileIndicesInStrip.at(i) = i;
- printf("\n****TILE END***");
- }
- }
- }*/
-
-
-/*void GLStrip::setStripForStripCount(){
- float currentX = stripOrigin.x;
- float currentY = stripOrigin.y;
- float currentZ = stripOrigin.z;
- this->stripWidth = (this->tileCount) * tileSize;
- this->tileStrip.resize(tileCount);
- this->tileIndicesInStrip.resize(tileCount);
- bool switchColorBetweenTiles = 0;
- float currentTileCount;
- currentTileCount = 0;
- for(int i = 0 ; i<this->tileStrip.size() ; i++){
- GLTile tile;
- currentTileCount++;
- printf("\n****TILE START***");
- vec4 color;
- if (switchColorBetweenTiles == 0) {
- color = vec4(1,0,0,0);
- switchColorBetweenTiles = 1;
- }
- else{
- color = vec4(0,0,1,0);
- switchColorBetweenTiles = 0;
- }
- currentX = this->stripOrigin.x + i*(this->tileSize);
- if(currentTileCount <= this->tileCount){
- //tile = tile.createTile(this->tileSize, color, this->stripTopology);
- vec3 tileOrigin = vec3(currentX , currentY , currentZ);
- tile = tile.setTileOrigin(tile, tileOrigin);
- printf("\n x : %f  y : %f  z : %f  count : %d" , tileOrigin.x,tileOrigin.y,tileOrigin.z , i);
- this->tileStrip.at(i) = tile;
- this->tileIndicesInStrip.at(i) = i;
- printf("\n****TILE END***");
- }
- 
- }
- 
- }*/
-
-/*vector<GLTile> GLStrip::getStrip(){
- 
- if(!this->tileStrip.empty())
- return this->tileStrip;
- else{
- vector<GLTile> emptyVector;
- return emptyVector;
- }
- }
- 
- size_t GLStrip::getStripPointerSize(){
- if(!this->tileStrip.empty()){
- return (((this->tileCount)+1)*4*sizeof(Vertex));
- 
- }
- else{
- cout<<"Cant return pointer size as the strip isnt initialized";
- return NULL;
- }
- }*/
 
 
 

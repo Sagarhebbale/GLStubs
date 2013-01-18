@@ -53,6 +53,11 @@ class GLStrip{
     void setStriporigin(vec3 argOrigin);
     void setTileColorMode(TileColorMode argColorMode);
     GLStrip createTileStrip(float stripWidth, vec2 origin);
+    void printVertices(vector<Vertex> vert);
+    void printVertexIndices();
+    vector<Vertex> getVertices();
+    vector<char> getVertexIndices();
+    
     private:
     void setStripForStripWidth();
     void setStripForStripCount();
@@ -62,7 +67,7 @@ class GLStrip{
     void setVertices();
     void setVertexIndices();
     void fillStripColors();
-    void printVertices(vector<Vertex> vert);
+    
     
     
 };

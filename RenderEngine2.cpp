@@ -34,6 +34,8 @@ struct Animation {
 
 class RenderingEngine2 : public IRenderingEngine {
 public:
+    vector<Vertex> vertices;
+    vector<char> indices;
     RenderingEngine2();
     void Initialize(int width, int height);
     void Render() const;
@@ -45,8 +47,10 @@ public:
 private:
     GLuint BuildShader(const char* source, GLenum shaderType) const;
     GLuint BuildProgram(const char* vShader, const char* fShader) const;
-   
-    GLPlane plane;
+    vector<Vertex> createTile();
+    vector<Vertex> createStrip();
+    vector<Vertex> objectVertices;
+    vector<char> objectIndices;
     Animation m_animation;
     GLuint m_simpleProgram;
     GLuint m_framebuffer;
@@ -75,16 +79,33 @@ RenderingEngine2::RenderingEngine2() : m_rotationAngle(0), m_scale(1), m_transla
     glBindRenderbuffer(GL_RENDERBUFFER, m_colorRenderbuffer);
 }
 
+vector<Vertex> RenderingEngine2::createTile(){
+    GLTile tile;
+    tile.setColorMode(kTileColorModePlain);
+    tile = tile.createPlainTile(1, vec4(1,0,0,0), kGLTriangleStrip);
+    
+    return tile.vertices;
+}
+
+vector<Vertex> RenderingEngine2::createStrip(){
+    GLStrip strip(kStriporientationHorizontal , kGLTriangleStrip);
+    strip.setDrawMode(kmodeStripWidth);
+    strip.setTileSize(1);
+    strip.setStripWidth(3);
+    strip.setTileColorMode(kTileColorModePlain);
+    strip.setStriporigin(vec3(0,0,0));
+    vertices = strip.getVertices();
+    indices = strip.getVertexIndices();
+    strip.printVertices(vertices);
+    this->objectIndices = strip.vertexIndices;
+    return vertices;
+
+}
 
 void RenderingEngine2::Initialize(int width, int height)
-{   //create and initialize the tile manager
-    GLStrip strip(kStriporientationHorizontal , kGLTriangleStrip);
-    strip.setDrawMode(kmodeStripCount);
-    strip.setTileSize(2);
-    strip.setStripCount(2);
-    strip.setStriporigin(vec3(0,0,0));
-    vector<char> indices = {0 , 1 , 2 ,3 , 4 , 5};
-    
+{
+    this->objectVertices = this->createStrip();
+   
     
     // Create the depth buffer.
     glGenRenderbuffers(1, &m_depthRenderbuffer);
@@ -136,8 +157,8 @@ void RenderingEngine2::Initialize(int width, int height)
    glGenBuffers(1, &m_vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER,
-                 strip.vertices.size()*sizeof(strip.vertices[0]),
-                 &strip.vertices[0],
+                 this->objectVertices.size()*sizeof(this->objectVertices[0]),
+                 &this->objectVertices[0],
                  GL_STATIC_DRAW);
     
     
@@ -145,8 +166,8 @@ void RenderingEngine2::Initialize(int width, int height)
     glGenBuffers(1, &m_indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-                 indices.size() * sizeof(indices[0]),
-                 &indices[0],
+                this->objectIndices.size() * sizeof(this->objectIndices[0]),
+                 &this->objectIndices[0],
                  GL_STATIC_DRAW);
     
    
@@ -307,7 +328,8 @@ void RenderingEngine2::Render() const
     
     const GLvoid* bodyOffset = 0;
     glEnableVertexAttribArray(colorSlot);
-    glDrawElements(GL_TRIANGLE_STRIP, 6, GL_UNSIGNED_BYTE, bodyOffset);
+    glDrawElements(GL_TRIANGLE_STRIP, indices.size(), GL_UNSIGNED_BYTE, bodyOffset);
+   
     glDisableVertexAttribArray(colorSlot);
     
     //glDrawElements(GL_TRIANGLES, m_diskIndexCount, GL_UNSIGNED_BYTE, diskOffset);*/
