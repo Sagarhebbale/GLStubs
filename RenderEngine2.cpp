@@ -47,7 +47,8 @@ public:
 private:
     GLuint BuildShader(const char* source, GLenum shaderType) const;
     GLuint BuildProgram(const char* vShader, const char* fShader) const;
-    vector<Vertex> createTile();
+    vector<Vertex> createPlainTile();
+    vector<Vertex> createMixedTile();
     vector<Vertex> createStrip();
     vector<Vertex> objectVertices;
     vector<char> objectIndices;
@@ -79,10 +80,28 @@ RenderingEngine2::RenderingEngine2() : m_rotationAngle(0), m_scale(1), m_transla
     glBindRenderbuffer(GL_RENDERBUFFER, m_colorRenderbuffer);
 }
 
-vector<Vertex> RenderingEngine2::createTile(){
+vector<Vertex> RenderingEngine2::createPlainTile(){
     GLTile tile;
     tile.setColorMode(kTileColorModePlain);
-    tile = tile.createPlainTile(1, vec4(1,0,0,0), kGLTriangleStrip);
+    tile = tile.createPlainTile(1, vec4(1,0,0,1), kGLTriangleStrip);
+    tile.setOrigin(vec3(SCREEN_RIGHTBOUNDS , 0 ,0));
+    this->objectIndices = tile.vertexIndices;
+    
+    return tile.vertices;
+}
+
+vector<Vertex> RenderingEngine2::createMixedTile(){
+    GLTile tile;
+    tile.setColorMode(kTileColorModeMixed);
+    vector<vec4> colors;
+    colors.resize(4);
+    vec4 firstColor = vec4(1,0,0,1);
+    vec4 secondColor = vec4(0,1,0,1);
+    vec4 thirdColor = vec4(0,0,1,1);
+    vec4 fourthColor = vec4(1,1,1,1);
+    colors = {firstColor , secondColor , thirdColor , fourthColor};
+    tile = tile.createTileWithMixedColor(1, colors, kGLTriangleStrip);
+    this->objectIndices = tile.vertexIndices;
     
     return tile.vertices;
 }
@@ -90,10 +109,12 @@ vector<Vertex> RenderingEngine2::createTile(){
 vector<Vertex> RenderingEngine2::createStrip(){
     GLStrip strip(kStriporientationHorizontal , kGLTriangleStrip);
     strip.setDrawMode(kmodeStripWidth);
+    float tileSize;
+    tileSize = 1.0;
     strip.setTileSize(1);
-    strip.setStripWidth(3);
+    strip.setStripWidth(SCREEN_RIGHTBOUNDS - SCREEN_LEFTBOUNDS+tileSize);
     strip.setTileColorMode(kTileColorModePlain);
-    strip.setStriporigin(vec3(0,0,0));
+    strip.setStriporigin(vec3(SCREEN_LEFTBOUNDS,SCREEN_TOPBOUNDS,0));
     vertices = strip.getVertices();
     indices = strip.getVertexIndices();
     strip.printVertices(vertices);
@@ -105,6 +126,8 @@ vector<Vertex> RenderingEngine2::createStrip(){
 void RenderingEngine2::Initialize(int width, int height)
 {
     this->objectVertices = this->createStrip();
+    //this->objectVertices = this->createPlainTile();
+    //this->objectVertices = this->createMixedTile();
    
     
     // Create the depth buffer.
@@ -315,7 +338,7 @@ void RenderingEngine2::Render() const
     mat4 modelviewMatrix = scale*rotation * translation;
     glUniformMatrix4fv(modelviewUniform, 1, 0, modelviewMatrix.Pointer());
     GLsizei stride = sizeof(Vertex);
-    const GLvoid* colorOffset = (GLvoid*) sizeof(vec4);
+    const GLvoid* colorOffset = (GLvoid*) sizeof(vec3);
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUniformMatrix4fv(modelviewUniform, 1, 0, modelviewMatrix.Pointer());
@@ -328,7 +351,7 @@ void RenderingEngine2::Render() const
     
     const GLvoid* bodyOffset = 0;
     glEnableVertexAttribArray(colorSlot);
-    glDrawElements(GL_TRIANGLE_STRIP, indices.size(), GL_UNSIGNED_BYTE, bodyOffset);
+    glDrawElements(GL_TRIANGLE_STRIP, this->objectIndices.size(), GL_UNSIGNED_BYTE, bodyOffset);
    
     glDisableVertexAttribArray(colorSlot);
     

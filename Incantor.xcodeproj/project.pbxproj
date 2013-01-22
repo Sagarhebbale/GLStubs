@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B602A4361640FFEB0007152E /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B602A4351640FFEB0007152E /* GLView.mm */; };
 		B61EB2B6167E305100B4AE8E /* GLStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B61EB2B4167E305100B4AE8E /* GLStrip.cpp */; };
+		B65578F916AE5E0B00CB4636 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B65578F816AE5E0B00CB4636 /* LocationController.m */; };
+		B65578FB16AE5E2700CB4636 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B65578FA16AE5E2700CB4636 /* CoreLocation.framework */; };
 		B6885CE61653720C009E29FF /* GLTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6885CE41653720C009E29FF /* GLTile.cpp */; };
 		B691A19C163E810F0053B398 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19B163E810F0053B398 /* UIKit.framework */; };
 		B691A19E163E810F0053B398 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B691A19D163E810F0053B398 /* Foundation.framework */; };
@@ -50,6 +52,9 @@
 		B613A7E7166345D200A0767D /* GLMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLMacros.h; sourceTree = "<group>"; };
 		B61EB2B4167E305100B4AE8E /* GLStrip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLStrip.cpp; sourceTree = "<group>"; };
 		B61EB2B5167E305100B4AE8E /* GLStrip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLStrip.hpp; sourceTree = "<group>"; };
+		B65578F716AE5E0B00CB4636 /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
+		B65578F816AE5E0B00CB4636 /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
+		B65578FA16AE5E2700CB4636 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B6885CE41653720C009E29FF /* GLTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLTile.cpp; sourceTree = "<group>"; };
 		B6885CE51653720C009E29FF /* GLTile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLTile.hpp; sourceTree = "<group>"; };
 		B6885CE816537F71009E29FF /* GLMath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLMath.hpp; sourceTree = "<group>"; };
@@ -91,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65578FB16AE5E2700CB4636 /* CoreLocation.framework in Frameworks */,
 				B691A1D3163EFD4B0053B398 /* QuartzCore.framework in Frameworks */,
 				B691A1D1163EFD430053B398 /* OpenGLES.framework in Frameworks */,
 				B691A19C163E810F0053B398 /* UIKit.framework in Frameworks */,
@@ -112,7 +118,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B6885CF9165CD028009E29FF /* Screens */ = {
+		B65578EE16AA735E00CB4636 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B65578F016AA737300CB4636 /* GLObjects */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		B65578F016AA737300CB4636 /* GLObjects */ = {
+			isa = PBXGroup;
+			children = (
+				B61EB2B4167E305100B4AE8E /* GLStrip.cpp */,
+				B61EB2B5167E305100B4AE8E /* GLStrip.hpp */,
+				B6885CE41653720C009E29FF /* GLTile.cpp */,
+				B6885CE51653720C009E29FF /* GLTile.hpp */,
+			);
+			name = GLObjects;
+			sourceTree = "<group>";
+		};
+		B65578F116AA739D00CB4636 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B65578F616AA742600CB4636 /* RenderEngine */,
+				B65578F516AA741A00CB4636 /* Screens */,
+				B65578F716AE5E0B00CB4636 /* LocationController.h */,
+				B65578F816AE5E0B00CB4636 /* LocationController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		B65578F316AA73D400CB4636 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B602A4341640FFEB0007152E /* GLView.h */,
+				B602A4351640FFEB0007152E /* GLView.mm */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		B65578F416AA73E100CB4636 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				B6885CE816537F71009E29FF /* GLMath.hpp */,
+				B693653D164926EE00263411 /* MyMath.hpp */,
+				B613A7E7166345D200A0767D /* GLMacros.h */,
+				B69365201647A5B000263411 /* Vector.hpp */,
+				B69365211647A5F000263411 /* Matrix.hpp */,
+				B69365221647A62900263411 /* Quaternion.hpp */,
+			);
+			name = Macros;
+			sourceTree = "<group>";
+		};
+		B65578F516AA741A00CB4636 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				B693652B16483C2B00263411 /* GLViewController.h */,
@@ -121,34 +179,32 @@
 			name = Screens;
 			sourceTree = "<group>";
 		};
-		B6885CFA165CD038009E29FF /* GLStuff */ = {
+		B65578F616AA742600CB4636 /* RenderEngine */ = {
 			isa = PBXGroup;
 			children = (
-				B61EB2B4167E305100B4AE8E /* GLStrip.cpp */,
-				B61EB2B5167E305100B4AE8E /* GLStrip.hpp */,
-				B6885CE816537F71009E29FF /* GLMath.hpp */,
-				B6885CE41653720C009E29FF /* GLTile.cpp */,
-				B6885CE51653720C009E29FF /* GLTile.hpp */,
-				B693653D164926EE00263411 /* MyMath.hpp */,
-				B613A7E7166345D200A0767D /* GLMacros.h */,
+				B69365021644D99B00263411 /* RenderEngine1.cpp */,
+				B69365101646414600263411 /* RenderEngine2.cpp */,
+				B602A437164107270007152E /* IRenderingEngine.hpp */,
 			);
-			name = GLStuff;
+			name = RenderEngine;
+			sourceTree = "<group>";
+		};
+		B6885CFA165CD038009E29FF /* GLMacros */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = GLMacros;
 			sourceTree = "<group>";
 		};
 		B691A18C163E810F0053B398 = {
 			isa = PBXGroup;
 			children = (
-				B6885CFA165CD038009E29FF /* GLStuff */,
-				B6885CF9165CD028009E29FF /* Screens */,
-				B693651E1647A59000263411 /* GraphicMath */,
+				B65578F416AA73E100CB4636 /* Macros */,
+				B65578F316AA73D400CB4636 /* Views */,
+				B65578F116AA739D00CB4636 /* Controllers */,
+				B65578EE16AA735E00CB4636 /* Models */,
+				B6885CFA165CD038009E29FF /* GLMacros */,
 				B693650A16463E3900263411 /* Shaders */,
-				B69365021644D99B00263411 /* RenderEngine1.cpp */,
-				B69365101646414600263411 /* RenderEngine2.cpp */,
-				B602A437164107270007152E /* IRenderingEngine.hpp */,
-				B602A4341640FFEB0007152E /* GLView.h */,
-				B602A4351640FFEB0007152E /* GLView.mm */,
-				B691A1D2163EFD4B0053B398 /* QuartzCore.framework */,
-				B691A1D0163EFD430053B398 /* OpenGLES.framework */,
 				B691A1A1163E810F0053B398 /* Incantor */,
 				B691A1BF163E810F0053B398 /* IncantorTests */,
 				B691A19A163E810F0053B398 /* Frameworks */,
@@ -168,6 +224,9 @@
 		B691A19A163E810F0053B398 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B65578FA16AE5E2700CB4636 /* CoreLocation.framework */,
+				B691A1D2163EFD4B0053B398 /* QuartzCore.framework */,
+				B691A1D0163EFD430053B398 /* OpenGLES.framework */,
 				B691A19B163E810F0053B398 /* UIKit.framework */,
 				B691A19D163E810F0053B398 /* Foundation.framework */,
 				B691A19F163E810F0053B398 /* CoreGraphics.framework */,
@@ -226,16 +285,6 @@
 				B69365241647C70400263411 /* Simplevert.glsl */,
 			);
 			name = Shaders;
-			sourceTree = "<group>";
-		};
-		B693651E1647A59000263411 /* GraphicMath */ = {
-			isa = PBXGroup;
-			children = (
-				B69365201647A5B000263411 /* Vector.hpp */,
-				B69365211647A5F000263411 /* Matrix.hpp */,
-				B69365221647A62900263411 /* Quaternion.hpp */,
-			);
-			name = GraphicMath;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +406,7 @@
 				B693652D16483C2B00263411 /* GLViewController.mm in Sources */,
 				B6885CE61653720C009E29FF /* GLTile.cpp in Sources */,
 				B61EB2B6167E305100B4AE8E /* GLStrip.cpp in Sources */,
+				B65578F916AE5E0B00CB4636 /* LocationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

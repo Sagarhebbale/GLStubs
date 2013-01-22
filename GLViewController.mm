@@ -14,6 +14,9 @@
 @end
 
 @implementation GLViewController
+@synthesize currentLatitude;
+@synthesize currentLongitude;
+@synthesize mapLocationController;
 @synthesize mainGLView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,7 +36,22 @@
     CGRect mainScreenBounds = [[UIScreen mainScreen] bounds];
     mainGLView = [[GLView alloc] initWithFrame:mainScreenBounds];
     self.view = mainGLView;
+    mapLocationController = [[LocationController alloc] init];
+    mapLocationController.delegate = self;
+    [mapLocationController.locMgr startUpdatingLocation];
+    
 	// Do any additional setup after loading the view.
+}
+
+
+-(void)locationUpdate:(CLLocation *)location{
+    NSLog(@"Lat : %f Long : %f", location.coordinate.latitude, location.coordinate.longitude);
+    self.currentLatitude = location.coordinate.latitude;
+    self.currentLongitude = location.coordinate.longitude;
+}
+
+- (void)locationError:(NSError *)error {
+	 NSLog(@"Location ERROR : %@", error.description);
 }
 
 - (void)didReceiveMemoryWarning

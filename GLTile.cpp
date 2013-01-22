@@ -111,14 +111,15 @@ void GLTile::setNullVertices(){
 void GLTile::setVertices(float size, vector<vec4>colors){
     vector<int> colorIndices;
     if(this->colorMode == kTileColorModePlain){
-        firstVertex = vertexMake(vec3(0 , size , 0), colors.at(0));
+        printVec4(colors.at(0));
+        this->firstVertex = vertexMake(vec3(0 , size , 0), colors.at(0));
         this->origin = firstVertex.Position;
         printf("\nFirst vertex x : %f , y: %f , z:%f",firstVertex.Position.x , firstVertex.Position.y ,firstVertex.Position.z);
-        secondVertex = vertexMake(vec3(0 , 0, 0), colors.at(0));
+        this->secondVertex = vertexMake(vec3(0 , 0, 0), colors.at(0));
         printf("\nSecond vertex x : %f , y: %f , z:%f",secondVertex.Position.x , secondVertex.Position.y ,secondVertex.Position.z);
-        thirdVertex = vertexMake(vec3(size , size, 0), colors.at(0));
+        this->thirdVertex = vertexMake(vec3(size , size, 0), colors.at(0));
         printf("\nThird vertex x : %f , y: %f , z:%f",thirdVertex.Position.x , thirdVertex.Position.y ,thirdVertex.Position.z);
-        fourthVertex = vertexMake(vec3(size , 0 , 0), colors.at(0));
+        this->fourthVertex = vertexMake(vec3(size , 0 , 0), colors.at(0));
         printf("\nFourth vertex x : %f , y: %f , z:%f",fourthVertex.Position.x , fourthVertex.Position.y ,fourthVertex.Position.z);
     }
     else{
@@ -126,11 +127,11 @@ void GLTile::setVertices(float size, vector<vec4>colors){
             firstVertex = vertexMake(vec3(0 , size , 0), colors.at(0));
             this->origin = firstVertex.Position;
             printf("\nFirst vertex x : %f , y: %f , z:%f",firstVertex.Position.x , firstVertex.Position.y ,firstVertex.Position.z);
-            secondVertex = vertexMake(vec3(0 , 0, 0), colors.at(1));
+            this->secondVertex = vertexMake(vec3(0 , 0, 0), colors.at(1));
             printf("\nSecond vertex x : %f , y: %f , z:%f",secondVertex.Position.x , secondVertex.Position.y ,secondVertex.Position.z);
-            thirdVertex = vertexMake(vec3(size , size, 0), colors.at(2));
+            this->thirdVertex = vertexMake(vec3(size , size, 0), colors.at(2));
             printf("\nThird vertex x : %f , y: %f , z:%f",thirdVertex.Position.x , thirdVertex.Position.y ,thirdVertex.Position.z);
-            fourthVertex = vertexMake(vec3(size , 0 , 0), colors.at(3));
+            this->fourthVertex = vertexMake(vec3(size , 0 , 0), colors.at(3));
             printf("\nFourth vertex x : %f , y: %f , z:%f",fourthVertex.Position.x , fourthVertex.Position.y ,fourthVertex.Position.z);
         }
         else{

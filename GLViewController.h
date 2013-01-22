@@ -7,13 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LocationController.h"
 #import "GLView.h"
 
-@interface GLViewController : UIViewController{
+@interface GLViewController : UIViewController<LocationControllerDelegate>{
     
     GLView *mainGLView;
+    LocationController *mapLocationController;
+    CLLocationDegrees currentLatitude;
+    CLLocationDegrees currentLongitude;
+    
+    
 }
 
 @property(nonatomic, retain)GLView *mainGLView;
+@property(nonatomic , retain)LocationController *mapLocationController;
+@property(nonatomic)CLLocationDegrees currentLatitude;
+@property(nonatomic)CLLocationDegrees currentLongitude;
+
 
 @end
