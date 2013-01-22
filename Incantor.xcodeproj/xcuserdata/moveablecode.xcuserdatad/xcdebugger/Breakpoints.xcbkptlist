@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RenderEngine2.cpp"
-         timestampString = "380531712.528472"
+         timestampString = "380539736.447733"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "185"
-         endingLineNumber = "185"
+         startingLineNumber = "187"
+         endingLineNumber = "187"
          landmarkName = "RenderingEngine2::Initialize(int width, int height)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -53,6 +53,19 @@
          startingLineNumber = "85"
          endingLineNumber = "85"
          landmarkName = "GLStrip::setStripCount(int count)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GLView.mm"
+         timestampString = "380542532.298907"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "192"
+         endingLineNumber = "192"
+         landmarkName = "-locationUpdate:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -39,6 +39,7 @@ public:
     void OnFingerUp(ivec2 location);
     void OnFingerDown(ivec2 location);
     void OnFingerMove(ivec2 oldLocation, ivec2 newLocation);
+    void OnLocationUpdate(ivec2 newLocation);
 private:
     vector<Vertex> m_cone;
     vector<Vertex> m_disk;
@@ -225,6 +226,10 @@ void RenderingEngine1::OnFingerMove(ivec2 previous, ivec2 location)
     m_rotationAngle = std::acos(direction.y) * 180.0f / 3.14159f;
     if (direction.x > 0)
         m_rotationAngle = -m_rotationAngle;
+}
+
+void RenderingEngine1::OnLocationUpdate(ivec2 newLocation){
+    printf("LLL");
 }
 
 

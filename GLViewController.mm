@@ -8,56 +8,87 @@
 
 #import "GLViewController.h"
 
+
 @interface GLViewController ()
 
 
 @end
 
+
+
 @implementation GLViewController
-@synthesize currentLatitude;
-@synthesize currentLongitude;
-@synthesize mapLocationController;
+@synthesize currentLocation;
 @synthesize mainGLView;
+@synthesize mapLocationController;
+@synthesize hasLocation;
+@synthesize checkedLocation;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+       
         // Custom initialization
     }
     return self;
 }
 
+-(void)setHasLocation:(BOOL)argHasLocation{
+    hasLocation = argHasLocation;
+    if(hasLocation == YES && self.checkedLocation == NO){
+        CGRect mainScreenBounds = [[UIScreen mainScreen] bounds];
+        mainGLView = [[GLView alloc] initWithFrame:mainScreenBounds andLocation:self.currentLocation];
+        self.view = mainGLView;
+        [self.mapLocationController.locMgr stopUpdatingLocation];
+    }
+    else{
+        UIAlertView *locationErroeAlert = [[UIAlertView alloc] initWithTitle:@"Location Service Error" message:@"Cannot render map witout location. Check to activate Location services" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+        [locationErroeAlert show];
+        [locationErroeAlert release];
+    }
+}
 
+-(void)locationUpdate:(CLLocation *)location{
+    if(location!=NULL){
+        self.hasLocation = YES;
+        self.checkedLocation = YES;
+        self.currentLocation = location;
+    }
+    else{
+        self.hasLocation = NO;
+        self.checkedLocation=NO;
+    }
+    
+}
+-(void)locationError:(NSError *)error{
+    self.hasLocation = NO;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CGRect mainScreenBounds = [[UIScreen mainScreen] bounds];
-    mainGLView = [[GLView alloc] initWithFrame:mainScreenBounds];
-    self.view = mainGLView;
-    mapLocationController = [[LocationController alloc] init];
-    mapLocationController.delegate = self;
-    [mapLocationController.locMgr startUpdatingLocation];
+    self.mapLocationController = [[LocationController alloc] init];
+    self.mapLocationController.delegate = self ;
+    self.mapLocationController.locMgr.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.mapLocationController.locMgr startUpdatingLocation];
+    
+    
+    
     
 	// Do any additional setup after loading the view.
 }
 
 
--(void)locationUpdate:(CLLocation *)location{
-    NSLog(@"Lat : %f Long : %f", location.coordinate.latitude, location.coordinate.longitude);
-    self.currentLatitude = location.coordinate.latitude;
-    self.currentLongitude = location.coordinate.longitude;
-}
-
-- (void)locationError:(NSError *)error {
-	 NSLog(@"Location ERROR : %@", error.description);
-}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc{
+    [mapLocationController release];
+    [super dealloc];
 }
 
 @end

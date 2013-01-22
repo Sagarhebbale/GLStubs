@@ -35,7 +35,7 @@ GLTile GLTile::createTileWithMixedColor(float size, vector<vec4> vertexColors, G
             this->vertexIndices.resize(4);
             this->tileSize = size;
             this->setVertices(size,vertexColors);
-            argTopology = topology;
+            //argTopology = topology;
             switch (topology) {
                 case kGLTriangleStrip:
                     this->vertexIndices = {0 , 1 , 2 , 3};
@@ -70,7 +70,7 @@ GLTile GLTile::createPlainTile(float size , vec4 color , GLTopology argTopology)
             colors.at(0) = color;
             this->tileSize = size;
             this->setVertices(size, colors);
-            argTopology = topology;
+            //argTopology = topology;
             switch (topology) {
                 case kGLTriangleStrip:
                     this->vertexIndices = {0 , 1 , 2 , 3};

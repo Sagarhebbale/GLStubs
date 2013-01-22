@@ -36,6 +36,7 @@ class RenderingEngine2 : public IRenderingEngine {
 public:
     vector<Vertex> vertices;
     vector<char> indices;
+    int stripCount;
     RenderingEngine2();
     void Initialize(int width, int height);
     void Render() const;
@@ -44,6 +45,7 @@ public:
     void OnFingerUp(ivec2 location);
     void OnFingerDown(ivec2 location);
     void OnFingerMove(ivec2 oldLocation, ivec2 newLocation);
+    void OnLocationUpdate(ivec2 newLocation);
 private:
     GLuint BuildShader(const char* source, GLenum shaderType) const;
     GLuint BuildProgram(const char* vShader, const char* fShader) const;
@@ -110,8 +112,8 @@ vector<Vertex> RenderingEngine2::createStrip(){
     GLStrip strip(kStriporientationHorizontal , kGLTriangleStrip);
     strip.setDrawMode(kmodeStripWidth);
     float tileSize;
-    tileSize = 1.0;
-    strip.setTileSize(1);
+    tileSize = 0.5;
+    strip.setTileSize(tileSize);
     strip.setStripWidth(SCREEN_RIGHTBOUNDS - SCREEN_LEFTBOUNDS+tileSize);
     strip.setTileColorMode(kTileColorModePlain);
     strip.setStriporigin(vec3(SCREEN_LEFTBOUNDS,SCREEN_TOPBOUNDS,0));
@@ -304,15 +306,19 @@ void RenderingEngine2::OnFingerDown(ivec2 location)
 
 void RenderingEngine2::OnFingerMove(ivec2 previous, ivec2 location)
 {
-    /*vec2 direction = vec2(location - m_pivotPoint).Normalized();
+    vec2 direction = vec2(location - m_pivotPoint).Normalized();
     
     // Flip the Y axis because pixel coords increase towards the bottom.
     direction.y = -direction.y;
     
     m_rotationAngle = std::acos(direction.y) * 180.0f / 3.14159f;
     if (direction.x > 0)
-        m_rotationAngle = -m_rotationAngle;*/
+        m_rotationAngle = -m_rotationAngle;
     m_translate = vec3((location.x - previous.x), (location.y - previous.y), 0);
+}
+
+void RenderingEngine2::OnLocationUpdate(ivec2 newLocation){
+    printf("UPDATED!");
 }
 
 void RenderingEngine2::Render() const

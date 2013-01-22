@@ -16,7 +16,7 @@
 	self = [super init];
     
 	if(self != nil) {
-		self.locMgr = [[[CLLocationManager alloc] init] autorelease];// Create new instance of locMgr
+		self.locMgr = [[CLLocationManager alloc] init];// Create new instance of locMgr
         self.locMgr.desiredAccuracy = kCLLocationAccuracyBest;
         self.locMgr.distanceFilter = kCLLocationAccuracyBest;
 		self.locMgr.delegate = self; // Set the delegate as self.
@@ -41,7 +41,7 @@
 }
 
 - (void)dealloc {
-	[self.locMgr release];
+	[locMgr release];
 	[super dealloc];
 }
 @end
