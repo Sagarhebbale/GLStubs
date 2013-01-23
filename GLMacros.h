@@ -14,7 +14,7 @@
 #define SCREEN_TOPBOUNDS 6.25
 #define SCREEN_BOTTOMBOUNDS -6.25
 
-#define MAP_REQUEST_BASE_URL http://a.tiles.mapbox.com/v3/sagar.map-fmc0olbz/
+#define MAP_REQUEST_BASE_URL @"http://a.tiles.mapbox.com/v3/sagar.map-fmc0olbz/"
 
 
 typedef enum{
@@ -25,15 +25,15 @@ typedef enum{
 }GLTopology;
 
 typedef struct {
-    float latitude;
-    float longitude;
+    double latitude;
+    double longitude;
     float zoomLevel;
     
 } MapTileParams;
 
-static void printVec4(vec4 vector){
+/*static void printVec4(vec4 vector){
     printf("/n MACRO DEBUG : Color   Red : %f Blue : %f Green :%f , Alpha : %f", vector.x , vector.y , vector.z, vector.w);
-}
+}*/
 
 
 #endif

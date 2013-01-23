@@ -8,22 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "GLView.h"
-#import "LocationController.h"
+#import "MapTileDownloader.h"
 
-@interface GLViewController : UIViewController<LocationControllerDelegate>{
+
+@interface GLViewController : UIViewController{
     
     GLView *mainGLView;
-    BOOL hasLocation;
-    BOOL checkedLocation;
-    LocationController *mapLocationController;
-    CLLocation *currentLocation;
+    MapTileDownloader *tileDownloader;
+    
     
 }
 @property(nonatomic, retain)GLView *mainGLView;
-@property (nonatomic) BOOL hasLocation;
-@property(nonatomic) BOOL checkedLocation;
-@property(nonatomic , retain) CLLocation *currentLocation;
-@property(nonatomic , retain)LocationController *mapLocationController;
+@property(nonatomic, retain)MapTileDownloader *tileDownloader;
+
 
 
 

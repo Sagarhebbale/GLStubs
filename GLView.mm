@@ -14,67 +14,14 @@ const BOOL ForceES1 = false;
 
 
 @implementation GLView
-@synthesize mapLocationController;
-@synthesize currentLocation;
+
 
 + (Class) layerClass
 {
     return [CAEAGLLayer class];
 }
 
--(id)initWithFrame:(CGRect)frame andLocation:(CLLocation *)location{
-    {
-        if (self = [super initWithFrame:frame]) {
-            self.currentLocation = location;
-            CAEAGLLayer* eaglLayer = (CAEAGLLayer*) super.layer;
-            eaglLayer.opaque = YES;
-            
-            
-            EAGLRenderingAPI api = kEAGLRenderingAPIOpenGLES2;
-            m_context = [[EAGLContext alloc] initWithAPI:api];
-            
-            if (!m_context || ForceES1) {
-                api = kEAGLRenderingAPIOpenGLES1;
-                m_context = [[EAGLContext alloc] initWithAPI:api];
-            }
-            
-            if (!m_context || ![EAGLContext setCurrentContext:m_context]) {
-                [self release];
-                return nil;
-            }
-            
-            if (api == kEAGLRenderingAPIOpenGLES1) {
-                m_renderingEngine = CreateRenderer1();
-            } else {
-                NSLog(@"Using openGLES2.0");
-                m_renderingEngine = CreateRenderer2();
-            }
-            
-            [m_context
-             renderbufferStorage:GL_RENDERBUFFER
-             fromDrawable: eaglLayer];
-            
-            m_renderingEngine->Initialize(CGRectGetWidth(frame), CGRectGetHeight(frame));
-            
-            
-            [self setUpDraw];
-            
-            [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-            
-            [[NSNotificationCenter defaultCenter]
-             addObserver:self
-             selector:@selector(didRotate:)
-             name:UIDeviceOrientationDidChangeNotification
-             object:nil];
-            
-            mapLocationController = [[LocationController alloc] init];
-            mapLocationController.delegate = self;
-            mapLocationController.locMgr.desiredAccuracy = kCLLocationAccuracyBest;
-            [mapLocationController.locMgr startUpdatingLocation];
-        }
-        return self;
-    }
-}
+
 - (id)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
@@ -119,10 +66,7 @@ const BOOL ForceES1 = false;
          name:UIDeviceOrientationDidChangeNotification
          object:nil];
         
-        mapLocationController = [[LocationController alloc] init];
-        mapLocationController.delegate = self;
-        mapLocationController.locMgr.desiredAccuracy = kCLLocationAccuracyBest;
-        [mapLocationController.locMgr startUpdatingLocation];
+
     }
     return self;
 }
@@ -186,17 +130,7 @@ const BOOL ForceES1 = false;
                                     ivec2(current.x, current.y));
 }
 
--(void)locationUpdate:(CLLocation *)location{
-    NSLog(@"Latitude : %f , Longitude : %f", location.coordinate.latitude,location.coordinate.longitude);
-    self.currentLocation = location;
-    ivec2 thisLocation = ivec2(location.coordinate.latitude , location.coordinate.longitude);
-    m_renderingEngine->OnLocationUpdate(thisLocation);
-    
-}
 
--(void)locationError:(NSError *)error{
-    NSLog(@"Location Error : %@",error.description);
-}
 
 
 

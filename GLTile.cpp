@@ -111,7 +111,7 @@ void GLTile::setNullVertices(){
 void GLTile::setVertices(float size, vector<vec4>colors){
     vector<int> colorIndices;
     if(this->colorMode == kTileColorModePlain){
-        printVec4(colors.at(0));
+        //printVec4(colors.at(0));
         this->firstVertex = vertexMake(vec3(0 , size , 0), colors.at(0));
         this->origin = firstVertex.Position;
         printf("\nFirst vertex x : %f , y: %f , z:%f",firstVertex.Position.x , firstVertex.Position.y ,firstVertex.Position.z);

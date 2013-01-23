@@ -10,23 +10,21 @@
 #import <OpenGLES/EAGL.h>
 #import <QuartzCore/QuartzCore.h>
 #import "IRenderingEngine.hpp"
-#import "LocationController.h"
 
 
-@interface GLView : UIView<LocationControllerDelegate>{
+
+@interface GLView : UIView{
     
     EAGLContext *m_context;
     IRenderingEngine *m_renderingEngine;
     float m_timestamp;
-    LocationController *mapLocationController;
-    CLLocation *currentLocation;
+    
  
 }
 
-@property(nonatomic , retain)LocationController *mapLocationController;
-@property(nonatomic , retain)CLLocation *currentLocation;
 
--(id)initWithFrame:(CGRect)frame andLocation:(CLLocation *)location;
+
+
 -(void)drawView: (CADisplayLink *)displayLink;
 -(void)didRotate: (NSNotification *)notification;
 -(void)setUpDraw;
