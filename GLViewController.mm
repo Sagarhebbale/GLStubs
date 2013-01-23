@@ -39,6 +39,7 @@
         CGRect mainScreenBounds = [[UIScreen mainScreen] bounds];
         mainGLView = [[GLView alloc] initWithFrame:mainScreenBounds andLocation:self.currentLocation];
         self.view = mainGLView;
+        self.checkedLocation = YES;
         [self.mapLocationController.locMgr stopUpdatingLocation];
     }
     else{
