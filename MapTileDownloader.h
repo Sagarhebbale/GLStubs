@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
-#import "GLMacros.h"
+#import "GLMacros.hpp"
 #import "Location.h"
 
 @protocol TileDownloadDelegate <NSObject>

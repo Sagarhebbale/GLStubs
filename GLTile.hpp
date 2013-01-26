@@ -14,7 +14,7 @@
 #include "Vector.hpp"
 #include "GLMath.hpp"
 #include <vector>
-#include "GLMacros.h"
+#include "GLMacros.hpp"
 
 using namespace std;
 #define defaultTileSize 20

@@ -15,7 +15,7 @@
 #include "/Users/moveablecode/Desktop/Incantor.git/Incantor /Shaders/Simplevert.glsl"
 #include "/Users/moveablecode/Desktop/Incantor.git/Incantor /Shaders/Simplefrag.glsl"
 #include "GLPlane.hpp"
-#include "GLMacros.h"
+#include "GLMacros.hpp"
 
 
 static const float AnimationDuration = 0.25f;
@@ -116,7 +116,7 @@ vector<Vertex> RenderingEngine2::createStrip(){
     strip.setTileSize(tileSize);
     strip.setStripWidth(SCREEN_RIGHTBOUNDS - SCREEN_LEFTBOUNDS+tileSize);
     strip.setTileColorMode(kTileColorModePlain);
-    strip.setStriporigin(vec3(SCREEN_LEFTBOUNDS,SCREEN_TOPBOUNDS,0));
+    strip.setStriporigin(vec3(0,0,0));
     vertices = strip.getVertices();
     indices = strip.getVertexIndices();
     strip.printVertices(vertices);

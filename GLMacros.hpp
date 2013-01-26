@@ -31,9 +31,6 @@ typedef struct {
     
 } MapTileParams;
 
-/*static void printVec4(vec4 vector){
-    printf("/n MACRO DEBUG : Color   Red : %f Blue : %f Green :%f , Alpha : %f", vector.x , vector.y , vector.z, vector.w);
-}*/
 
 
 #endif

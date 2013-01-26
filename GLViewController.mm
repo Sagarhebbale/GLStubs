@@ -37,7 +37,7 @@
     self.tileDownloader.delegate = self;
     CGRect mainScreenBounds = [[UIScreen mainScreen] bounds];
     mainGLView = [[GLView alloc] initWithFrame:mainScreenBounds];
-   
+    self.view = mainGLView;
     
     
     
@@ -45,8 +45,12 @@
 	// Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+     
+}
+
 -(void)viewDidAppear:(BOOL)animated{
-     self.view = mainGLView;
+    
     
 }
 

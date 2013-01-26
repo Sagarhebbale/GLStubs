@@ -124,7 +124,7 @@ static MapTileDownloader *sharedInstance = nil;
         [currentMapTile release];
     }
     currentMapTile = argCurrentMapTile;
-    [delegate didDownloadMapTile:currentMapTile];
+    [delegate didDownloadMapTile:currentMapTile] ;
 }
 
 -(UIImage *)currentMapTile{
@@ -160,7 +160,7 @@ static MapTileDownloader *sharedInstance = nil;
     NSString *latStringVal = [NSString stringWithFormat:@"%.15f",params.latitude];
     NSString *longStringVal = [NSString stringWithFormat:@"%.15f",params.longitude];
     NSString *zoomStringVal = [[[NSDecimalNumber alloc] initWithDouble:params.zoomLevel] stringValue];
-    self.paramString = [[NSString alloc] initWithFormat:@"%@%@,%@,%@/20X20.png",self.baseUrl,latStringVal,longStringVal,zoomStringVal];
+    self.paramString = [[NSString alloc] initWithFormat:@"%@%@,%@,%@/200X200.png",self.baseUrl,latStringVal,longStringVal,zoomStringVal];
     //self.paramString = [self.baseUrl stringByAppendingString:self.paramString];
     NSLog(@"URL : %@", self.paramString);
     return self.paramString ;
