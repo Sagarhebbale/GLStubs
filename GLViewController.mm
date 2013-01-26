@@ -33,7 +33,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tileDownloader = [[MapTileDownloader alloc] init];
+    self.tileDownloader = [MapTileDownloader sharedInstance];
+    self.tileDownloader.delegate = self;
+    CGRect mainScreenBounds = [[UIScreen mainScreen] bounds];
+    mainGLView = [[GLView alloc] initWithFrame:mainScreenBounds];
+   
     
     
     
@@ -41,7 +45,10 @@
 	// Do any additional setup after loading the view.
 }
 
-
+-(void)viewDidAppear:(BOOL)animated{
+     self.view = mainGLView;
+    
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -52,6 +59,19 @@
 -(void)dealloc{
     
     [super dealloc];
+}
+
+-(void)didDownloadMapTile:(UIImage *)tileImage{
+    UIImageView *tileView = [[UIImageView alloc] initWithImage:tileImage];
+    tileView.frame = CGRectMake(50, 50, 100, 100);
+    [self.mainGLView addSubview:tileView];
+    [tileView release];
+    //self.view = mainGLView;
+    //[self.view setNeedsDisplay];
+}
+
+-(void)couldNotDownLoadTile:(NSError *)error{
+    
 }
 
 @end

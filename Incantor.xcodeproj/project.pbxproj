@@ -60,6 +60,7 @@
 		B6E5D7D616AFC71A0078053D /* MapTileDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E5D7D516AFC71A0078053D /* MapTileDownloader.m */; };
 		B6E5D7D816B001140078053D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E5D7D716B001140078053D /* libz.dylib */; };
 		B6E5D7DC16B002270078053D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E5D7DB16B002270078053D /* Reachability.m */; };
+		B6F25B0616B27C4800A25005 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F25B0516B27C4700A25005 /* Location.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,8 @@
 		B6E5D7D716B001140078053D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		B6E5D7DA16B002270078053D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ASIHTTPRequest/Classes/Reachability.h; sourceTree = "<group>"; };
 		B6E5D7DB16B002270078053D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ASIHTTPRequest/Classes/Reachability.m; sourceTree = "<group>"; };
+		B6F25B0416B27C4700A25005 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		B6F25B0516B27C4700A25005 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +235,8 @@
 				B65578F816AE5E0B00CB4636 /* LocationController.m */,
 				B6E5D7D416AFC71A0078053D /* MapTileDownloader.h */,
 				B6E5D7D516AFC71A0078053D /* MapTileDownloader.m */,
+				B6F25B0416B27C4700A25005 /* Location.h */,
+				B6F25B0516B27C4700A25005 /* Location.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -605,6 +610,7 @@
 				B6E5D7BE16AFC5EC0078053D /* ASIS3ServiceRequest.m in Sources */,
 				B6E5D7D616AFC71A0078053D /* MapTileDownloader.m in Sources */,
 				B6E5D7DC16B002270078053D /* Reachability.m in Sources */,
+				B6F25B0616B27C4800A25005 /* Location.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

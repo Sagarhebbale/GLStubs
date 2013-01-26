@@ -11,7 +11,7 @@
 #import "MapTileDownloader.h"
 
 
-@interface GLViewController : UIViewController{
+@interface GLViewController : UIViewController<TileDownloadDelegate>{
     
     GLView *mainGLView;
     MapTileDownloader *tileDownloader;
