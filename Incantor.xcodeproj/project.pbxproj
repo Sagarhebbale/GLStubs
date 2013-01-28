@@ -229,14 +229,11 @@
 		B65578F116AA739D00CB4636 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B6F25B2B16B6957000A25005 /* SingeltonControllers */,
 				B65578F616AA742600CB4636 /* RenderEngine */,
 				B65578F516AA741A00CB4636 /* Screens */,
 				B65578F716AE5E0B00CB4636 /* LocationController.h */,
 				B65578F816AE5E0B00CB4636 /* LocationController.m */,
-				B6E5D7D416AFC71A0078053D /* MapTileDownloader.h */,
-				B6E5D7D516AFC71A0078053D /* MapTileDownloader.m */,
-				B6F25B0416B27C4700A25005 /* Location.h */,
-				B6F25B0516B27C4700A25005 /* Location.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -465,6 +462,17 @@
 				B6E5D7DB16B002270078053D /* Reachability.m */,
 			);
 			name = External;
+			sourceTree = "<group>";
+		};
+		B6F25B2B16B6957000A25005 /* SingeltonControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B6E5D7D416AFC71A0078053D /* MapTileDownloader.h */,
+				B6E5D7D516AFC71A0078053D /* MapTileDownloader.m */,
+				B6F25B0416B27C4700A25005 /* Location.h */,
+				B6F25B0516B27C4700A25005 /* Location.m */,
+			);
+			name = SingeltonControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

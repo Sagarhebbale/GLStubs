@@ -43,6 +43,7 @@ public:
     GLTile createTileWithMixedColor(float tileSize, vector<vec4> vertexColors, GLTopology topology);
     void setOrigin(vec3 origin);
     void setNeedsVertexData(bool needsData);
+    
 
     ~GLTile();
 private:

@@ -46,9 +46,12 @@ public:
     void OnFingerDown(ivec2 location);
     void OnFingerMove(ivec2 oldLocation, ivec2 newLocation);
     void OnLocationUpdate(ivec2 newLocation);
+    
 private:
     GLuint BuildShader(const char* source, GLenum shaderType) const;
     GLuint BuildProgram(const char* vShader, const char* fShader) const;
+    void updateRenderer();
+    void generateVertexdataForLocation(ivec2 location);
     vector<Vertex> createPlainTile();
     vector<Vertex> createMixedTile();
     vector<Vertex> createStrip();
@@ -67,6 +70,7 @@ private:
     GLuint m_vertexBuffer;
     GLuint m_indexBuffer;
     GLuint m_tileIndexCount;
+    
     
 };
 
@@ -87,6 +91,7 @@ vector<Vertex> RenderingEngine2::createPlainTile(){
     tile.setColorMode(kTileColorModePlain);
     tile = tile.createPlainTile(1, vec4(1,0,0,1), kGLTriangleStrip);
     tile.setOrigin(vec3(SCREEN_RIGHTBOUNDS , 0 ,0));
+    this->objectVertices = tile.vertices;
     this->objectIndices = tile.vertexIndices;
     
     return tile.vertices;
@@ -103,6 +108,13 @@ vector<Vertex> RenderingEngine2::createMixedTile(){
     vec4 fourthColor = vec4(1,1,1,1);
     colors = {firstColor , secondColor , thirdColor , fourthColor};
     tile = tile.createTileWithMixedColor(1, colors, kGLTriangleStrip);
+    vec3 origin = vec3(0.8,1,0);
+    NormPosition normPos;
+    normPos.x = origin.x;
+    normPos.y = origin.y;
+    normPos.z = origin.z;
+    AbsPosition pos = getAbsPosition(normPos);
+    tile.setOrigin(vec3(pos.x , pos.y , pos.z));
     this->objectIndices = tile.vertexIndices;
     
     return tile.vertices;
@@ -127,9 +139,9 @@ vector<Vertex> RenderingEngine2::createStrip(){
 
 void RenderingEngine2::Initialize(int width, int height)
 {
-    this->objectVertices = this->createStrip();
+    //this->objectVertices = this->createStrip();
     //this->objectVertices = this->createPlainTile();
-    //this->objectVertices = this->createMixedTile();
+    this->objectVertices = this->createMixedTile();
    
     
     // Create the depth buffer.
@@ -317,8 +329,19 @@ void RenderingEngine2::OnFingerMove(ivec2 previous, ivec2 location)
     m_translate = vec3((location.x - previous.x), (location.y - previous.y), 0);
 }
 
+
 void RenderingEngine2::OnLocationUpdate(ivec2 newLocation){
     printf("UPDATED!");
+    this->generateVertexdataForLocation(newLocation);
+    this->updateRenderer();
+}
+
+void RenderingEngine2::updateRenderer(){
+    
+}
+
+void RenderingEngine2::generateVertexdataForLocation(ivec2 location){
+    
 }
 
 void RenderingEngine2::Render() const
@@ -351,6 +374,7 @@ void RenderingEngine2::Render() const
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+    
     glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, stride, 0);
     glVertexAttribPointer(colorSlot, 4, GL_FLOAT, GL_FALSE, stride, colorOffset);
     glEnableVertexAttribArray(positionSlot);
@@ -360,30 +384,9 @@ void RenderingEngine2::Render() const
     glDrawElements(GL_TRIANGLE_STRIP, this->objectIndices.size(), GL_UNSIGNED_BYTE, bodyOffset);
    
     glDisableVertexAttribArray(colorSlot);
-    
-    //glDrawElements(GL_TRIANGLES, m_diskIndexCount, GL_UNSIGNED_BYTE, diskOffset);*/
-    
     glDisableVertexAttribArray(positionSlot);
    
-    /*for(int i = 0; i<plane.size() ; i++){
-        vector<GLTile> strip;
-        strip = plane.at(i);
-        for(int j = 0; j<strip.size();j++){
-            GLsizei stride = sizeof(Vertex);
-            const GLvoid* pCoords = &strip[j].tile.front().Position.x;
-            const GLvoid* pColors = &strip[j].tile.front().Color.x;
-            glVertexAttribPointer(positionSlot, 3, GL_FLOAT,
-                                  GL_FALSE, stride, pCoords);
-            glVertexAttribPointer(colorSlot, 4, GL_FLOAT,
-                                  GL_FALSE, stride, pColors);
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, strip[j].tile.size());
-        }
-        
-       
-        
-    }*/
-    
-   
-   
 }
+
+
 
