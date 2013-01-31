@@ -14,7 +14,7 @@
 #define STRINGIFY(A)  #A
 #include "/Users/moveablecode/Desktop/Incantor.git/Incantor /Shaders/Simplevert.glsl"
 #include "/Users/moveablecode/Desktop/Incantor.git/Incantor /Shaders/Simplefrag.glsl"
-#include "GLPlane.hpp"
+#include "GLTile.hpp"
 #include "GLMacros.hpp"
 
 
@@ -46,13 +46,17 @@ public:
     void OnFingerDown(ivec2 location);
     void OnFingerMove(ivec2 oldLocation, ivec2 newLocation);
     void OnLocationUpdate(ivec2 newLocation);
-    
+    void setObjectVertices(vector<Vertex> vertices);
+    vector<Vertex> getObjectVertices();
+    void setObjectIndices(vector<char> indices);
+    void setUpTexture();
 private:
     GLuint BuildShader(const char* source, GLenum shaderType) const;
     GLuint BuildProgram(const char* vShader, const char* fShader) const;
     void updateRenderer();
     void generateVertexdataForLocation(ivec2 location);
-    vector<Vertex> createPlainTile();
+    void createPlainTile();
+    void createTile();
     vector<Vertex> createMixedTile();
     vector<Vertex> createStrip();
     vector<Vertex> objectVertices;
@@ -74,6 +78,7 @@ private:
     
 };
 
+#pragma mark Initialization Methods
 IRenderingEngine* CreateRenderer2()
 {
     return new RenderingEngine2();
@@ -86,83 +91,34 @@ RenderingEngine2::RenderingEngine2() : m_rotationAngle(0), m_scale(1), m_transla
     glBindRenderbuffer(GL_RENDERBUFFER, m_colorRenderbuffer);
 }
 
-vector<Vertex> RenderingEngine2::createPlainTile(){
-    GLTile tile;
-    tile.setColorMode(kTileColorModePlain);
-    tile = tile.createPlainTile(1, vec4(1,0,0,1), kGLTriangleStrip);
-    tile.setOrigin(vec3(SCREEN_RIGHTBOUNDS , 0 ,0));
-    this->objectVertices = tile.vertices;
-    this->objectIndices = tile.vertexIndices;
-    
-    return tile.vertices;
-}
-
-vector<Vertex> RenderingEngine2::createMixedTile(){
-    GLTile tile;
-    tile.setColorMode(kTileColorModeMixed);
-    vector<vec4> colors;
-    colors.resize(4);
-    vec4 firstColor = vec4(1,0,0,1);
-    vec4 secondColor = vec4(0,1,0,1);
-    vec4 thirdColor = vec4(0,0,1,1);
-    vec4 fourthColor = vec4(1,1,1,1);
-    colors = {firstColor , secondColor , thirdColor , fourthColor};
-    tile = tile.createTileWithMixedColor(1, colors, kGLTriangleStrip);
-    vec3 origin = vec3(0.8,1,0);
-    NormPosition normPos;
-    normPos.x = origin.x;
-    normPos.y = origin.y;
-    normPos.z = origin.z;
-    AbsPosition pos = getAbsPosition(normPos);
-    tile.setOrigin(vec3(pos.x , pos.y , pos.z));
-    this->objectIndices = tile.vertexIndices;
-    
-    return tile.vertices;
-}
-
-vector<Vertex> RenderingEngine2::createStrip(){
-    GLStrip strip(kStriporientationHorizontal , kGLTriangleStrip);
-    strip.setDrawMode(kmodeStripWidth);
-    float tileSize;
-    tileSize = 0.5;
-    strip.setTileSize(tileSize);
-    strip.setStripWidth(SCREEN_RIGHTBOUNDS - SCREEN_LEFTBOUNDS+tileSize);
-    strip.setTileColorMode(kTileColorModePlain);
-    strip.setStriporigin(vec3(0,0,0));
-    vertices = strip.getVertices();
-    indices = strip.getVertexIndices();
-    strip.printVertices(vertices);
-    this->objectIndices = strip.vertexIndices;
-    return vertices;
-
-}
-
 void RenderingEngine2::Initialize(int width, int height)
 {
     //this->objectVertices = this->createStrip();
-    //this->objectVertices = this->createPlainTile();
-    this->objectVertices = this->createMixedTile();
-   
+    //this->createPlainTile();
+    this->createTile();
+    
+    //this->objectVertices = this->createMixedTile();
+    
     
     // Create the depth buffer.
     glGenRenderbuffers(1, &m_depthRenderbuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, m_depthRenderbuffer);
     glRenderbufferStorage(GL_RENDERBUFFER,
-                             GL_DEPTH_COMPONENT16,
-                             width,
-                             height);
+                          GL_DEPTH_COMPONENT16,
+                          width,
+                          height);
     
     // Create the framebuffer object; attach the depth and color buffers.
     glGenFramebuffers(1, &m_framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER,
-                                 GL_COLOR_ATTACHMENT0,
-                                 GL_RENDERBUFFER,
-                                 m_colorRenderbuffer);
+                              GL_COLOR_ATTACHMENT0,
+                              GL_RENDERBUFFER,
+                              m_colorRenderbuffer);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER,
-                                 GL_DEPTH_ATTACHMENT,
-                                 GL_RENDERBUFFER,
-                                 m_depthRenderbuffer);
+                              GL_DEPTH_ATTACHMENT,
+                              GL_RENDERBUFFER,
+                              m_depthRenderbuffer);
     
     // Bind the color buffer for rendering.
     glBindRenderbuffer(GL_RENDERBUFFER, m_colorRenderbuffer);
@@ -181,17 +137,17 @@ void RenderingEngine2::Initialize(int width, int height)
     rect = vec2(width , height);
     float size = 0.1*tanf(Deg_to_Rad(45.0) / 2.0);
     printf("size : %f", size);
-    mat4 projectionMatrix = mat4:: Frustum(-size,                                    
-               size,                                      
-               -size / (rect.x / rect.y),   
-               size / (rect.x/ rect.y),    
-               .01,                                      
-               1000.0);                                          
-
+    mat4 projectionMatrix = mat4:: Frustum(-size,
+                                           size,
+                                           -size / (rect.x / rect.y),
+                                           size / (rect.x/ rect.y),
+                                           .01,
+                                           1000.0);
+    
     glUniformMatrix4fv(projectionUniform, 1, 0,
                        projectionMatrix.Pointer());
     
-   glGenBuffers(1, &m_vertexBuffer);
+    glGenBuffers(1, &m_vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER,
                  this->objectVertices.size()*sizeof(this->objectVertices[0]),
@@ -203,14 +159,51 @@ void RenderingEngine2::Initialize(int width, int height)
     glGenBuffers(1, &m_indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-                this->objectIndices.size() * sizeof(this->objectIndices[0]),
+                 this->objectIndices.size() * sizeof(this->objectIndices[0]),
                  &this->objectIndices[0],
                  GL_STATIC_DRAW);
     
-   
+    this->setUpTexture();
+    
+}
+
+void RenderingEngine2::setUpTexture(){
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_SRC_COLOR);
+    GLuint      texture[1];
+    glGenTextures(1, &texture[0]);
 }
 
 
+
+
+#pragma mark GLObject Generation methods
+
+void RenderingEngine2::createTile(){
+    GLTile tile;
+    tile.enableDataSource(1);
+    tile.createTile(TILE_WIDTH, TILE_HEIGHT, vec4(1,0,0,1), kGLTriangleStrip);
+    tile.setOrigin(vec3(-0.58,1.17,0));
+    this->setObjectVertices(tile.absVertices);
+    this->setObjectIndices(tile.vertexIndices);
+}
+
+void RenderingEngine2::setObjectVertices(vector<Vertex> argVertices){
+    if(!this->objectVertices.empty()){
+        this->objectVertices.clear();
+    }
+    this->objectVertices = argVertices;
+}
+
+void RenderingEngine2::setObjectIndices(vector<char> indices){
+    if(!this->objectIndices.empty()){
+        this->objectIndices.clear();
+    }
+    this->objectIndices = indices;
+}
+
+#pragma mark CallBacks 
 void RenderingEngine2::OnRotate(DeviceOrientation orientation)
 {
     vec3 direction;
@@ -263,48 +256,6 @@ void RenderingEngine2::UpdateAnimation(float timeStep)
     }
 }
 
-GLuint RenderingEngine2::BuildProgram(const char* vertexShaderSource,
-                                      const char* fragmentShaderSource) const
-{
-    GLuint vertexShader = BuildShader(vertexShaderSource, GL_VERTEX_SHADER);
-    GLuint fragmentShader = BuildShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
-    
-    GLuint programHandle = glCreateProgram();
-    glAttachShader(programHandle, vertexShader);
-    glAttachShader(programHandle, fragmentShader);
-    glLinkProgram(programHandle);
-    
-    GLint linkSuccess;
-    glGetProgramiv(programHandle, GL_LINK_STATUS, &linkSuccess);
-    if (linkSuccess == GL_FALSE) {
-        GLchar messages[256];
-        glGetProgramInfoLog(programHandle, sizeof(messages), 0, &messages[0]);
-        std::cout << messages;
-        exit(1);
-    }
-    
-    return programHandle;
-}
-
-GLuint RenderingEngine2::BuildShader(const char* source, GLenum shaderType) const
-{
-    GLuint shaderHandle = glCreateShader(shaderType);
-    glShaderSource(shaderHandle, 1, &source, 0);
-    glCompileShader(shaderHandle);
-    
-    GLint compileSuccess;
-    glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &compileSuccess);
-    
-    if (compileSuccess == GL_FALSE) {
-        GLchar messages[256];
-        glGetShaderInfoLog(shaderHandle, sizeof(messages), 0, &messages[0]);
-        std::cout << messages;
-        exit(1);
-    }
-    
-    return shaderHandle;
-}
-
 void RenderingEngine2::OnFingerUp(ivec2 location)
 {
     m_scale = 1.0f;
@@ -344,6 +295,7 @@ void RenderingEngine2::generateVertexdataForLocation(ivec2 location){
     
 }
 
+#pragma mark Renderer
 void RenderingEngine2::Render() const
 {
     GLuint positionSlot = glGetAttribLocation(m_simpleProgram,
@@ -387,6 +339,51 @@ void RenderingEngine2::Render() const
     glDisableVertexAttribArray(positionSlot);
    
 }
+
+#pragma mark Shader Specific Code
+
+GLuint RenderingEngine2::BuildProgram(const char* vertexShaderSource,
+                                      const char* fragmentShaderSource) const
+{
+    GLuint vertexShader = BuildShader(vertexShaderSource, GL_VERTEX_SHADER);
+    GLuint fragmentShader = BuildShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
+    
+    GLuint programHandle = glCreateProgram();
+    glAttachShader(programHandle, vertexShader);
+    glAttachShader(programHandle, fragmentShader);
+    glLinkProgram(programHandle);
+    
+    GLint linkSuccess;
+    glGetProgramiv(programHandle, GL_LINK_STATUS, &linkSuccess);
+    if (linkSuccess == GL_FALSE) {
+        GLchar messages[256];
+        glGetProgramInfoLog(programHandle, sizeof(messages), 0, &messages[0]);
+        std::cout << messages;
+        exit(1);
+    }
+    
+    return programHandle;
+}
+
+GLuint RenderingEngine2::BuildShader(const char* source, GLenum shaderType) const
+{
+    GLuint shaderHandle = glCreateShader(shaderType);
+    glShaderSource(shaderHandle, 1, &source, 0);
+    glCompileShader(shaderHandle);
+    
+    GLint compileSuccess;
+    glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &compileSuccess);
+    
+    if (compileSuccess == GL_FALSE) {
+        GLchar messages[256];
+        glGetShaderInfoLog(shaderHandle, sizeof(messages), 0, &messages[0]);
+        std::cout << messages;
+        exit(1);
+    }
+    
+    return shaderHandle;
+}
+
 
 
 

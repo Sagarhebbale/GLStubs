@@ -21,36 +21,33 @@ using namespace std;
 #define defaultTilColor vec4(1,0,0,1)
 #define tileVertexCount 4;
 
-typedef enum{
-    kTileColorModePlain,
-    kTileColorModeMixed,
-}TileColorMode;
 
 class GLTile {
 public:
     //tile properties
     vec3 origin;
-    float tileSize;
+    float tileWidth;
+    float tileHeight;
     vector<Vertex> vertices;
+    vector<Vertex> absVertices;
     GLTopology topology;   //indicates the openGLTopology to draw the tile in
     vector<char> vertexIndices;
-    TileColorMode colorMode;   //indicates the mode of coloring of vertices
+   //indicates the mode of coloring of vertices
     bool needsVertexData;  
     Vertex firstVertex , secondVertex , thirdVertex , fourthVertex;
     struct GLTile* makeTile();
-    void setColorMode(TileColorMode argMode);
     GLTile createPlainTile(float size, vec4 color , GLTopology argTopology);
-    GLTile createTileWithMixedColor(float tileSize, vector<vec4> vertexColors, GLTopology topology);
     void setOrigin(vec3 origin);
     void setNeedsVertexData(bool needsData);
-    
-
+    void createTile(float tileWidth, float tileHeight , vec4 color , GLTopology argTopology);
+    void enableDataSource(bool isDataSource);
     ~GLTile();
 private:
-    void setVertices(float size , vector<vec4> colors);
+    void setVerticesForWidthAndHeight(float width , float height , vec4 color);
     void setNullVertices();
     void reloadVertexData();
     Vertex vertexMake(vec3 position, vec4 color);
+    void setAbsVertices();
     
     
 };

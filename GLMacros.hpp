@@ -15,7 +15,10 @@
 #define SCREEN_BOTTOMBOUNDS -6.25
 #define SREEN_INTO_BOUNDS -10
 #define SCREEN_OUT_BOUNDS 10
-
+#define NORM_X_BOUNDS 1
+#define NORM_Y_BOUNDS 1.48
+#define TILE_WIDTH 0.1
+#define TILE_HEIGHT 0.1
 #define MAP_REQUEST_BASE_URL @"http://a.tiles.mapbox.com/v3/sagar.map-fmc0olbz/"
 
 

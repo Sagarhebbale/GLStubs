@@ -67,7 +67,7 @@
 
 -(void)didDownloadMapTile:(UIImage *)tileImage{
     UIImageView *tileView = [[UIImageView alloc] initWithImage:tileImage];
-    tileView.frame = CGRectMake(50, 50, 100, 100);
+    tileView.frame = CGRectMake(50, 50, tileImage.size.width, tileImage.size.height);
     [self.mainGLView addSubview:tileView];
     [tileView release];
     //self.view = mainGLView;
