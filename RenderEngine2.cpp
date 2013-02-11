@@ -184,9 +184,10 @@ void RenderingEngine2::createTile(){
     GLTile tile;
     tile.enableDataSource(1);
     tile.createTile(TILE_WIDTH, TILE_HEIGHT, vec4(1,0,0,1), kGLTriangleStrip);
-    tile.setOrigin(vec3(-0.58,1.17,0));
-    this->setObjectVertices(tile.absVertices);
+    tile.setOrigin(vec3(160,240,0));
+    this->setObjectVertices(tile.vertices);
     this->setObjectIndices(tile.vertexIndices);
+    printf("\nABSOLUTE FROM SCREEN CO_ORDINATES  x : %f , y : %f , z : %f",tile.origin.x, tile.origin.y , tile.origin.z );
 }
 
 void RenderingEngine2::setObjectVertices(vector<Vertex> argVertices){

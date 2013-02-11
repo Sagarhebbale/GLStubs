@@ -47,7 +47,7 @@ private:
     void setNullVertices();
     void reloadVertexData();
     Vertex vertexMake(vec3 position, vec4 color);
-    void setAbsVertices();
+    //void setAbsVertices();
     
     
 };

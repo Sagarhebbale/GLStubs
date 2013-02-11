@@ -28,9 +28,6 @@ void GLTile::enableDataSource(bool isDataSource){
     this->setNeedsVertexData(isDataSource);
 }
 
-
-
-
 void GLTile::setNullVertices(){
     if(!this->needsVertexData){
         this->firstVertex = NULL_VERTEX;
@@ -45,8 +42,8 @@ void GLTile::setNullVertices(){
 void GLTile::createTile(float argTileWidth, float argTileHeight, vec4 colors, GLTopology argTopology){
     if(this->needsVertexData){
         this->vertexIndices.resize(4);
-        this->tileWidth = argTileWidth;
-        this->tileHeight = argTileHeight;
+        this->tileWidth = argTileWidth*SCREEN_RIGHTBOUNDS*2/SCREEN_X_RES;
+        this->tileHeight = argTileHeight*SCREEN_TOPBOUNDS*2/SCREEN_Y_RES;
         this->setVerticesForWidthAndHeight(argTileWidth, argTileHeight, colors);
         //argTopology = topology;
         switch (topology) {
@@ -92,16 +89,26 @@ void GLTile::setVerticesForWidthAndHeight(float width, float height, vec4 color)
 
 
 void GLTile::setOrigin(vec3 origin){
-    this->origin = origin;
+    AbsPosition aPos;
+    aPos = getAbsPosForScreenCoords(origin.x, origin.y, origin.z);
+    //nPos = getNormPosition(aPos);
+    this->origin.x = aPos.x;
+    this->origin.y = aPos.y;
+    this->origin.z = aPos.z;
     if(this->tileWidth != 0 && this->tileHeight !=0){
         this->setNeedsVertexData(1);
-        this->firstVertex.Position = origin;
-        this->secondVertex.Position = vec3(origin.x, origin.y - this->tileHeight ,origin.z);
-        this->thirdVertex.Position = vec3(origin.x + this->tileWidth, origin.y,origin.z);
-        this->fourthVertex.Position = vec3(origin.x + this->tileWidth , origin.y -this->tileHeight , origin.z);
+        this->firstVertex.Position = this->origin;
+        this->secondVertex.Position = vec3(this->origin.x, this->origin.y - this->tileHeight ,this->origin.z);
+        this->thirdVertex.Position = vec3(this->origin.x + this->tileWidth, this->origin.y,this->origin.z);
+        this->fourthVertex.Position = vec3(this->origin.x + this->tileWidth , this->origin.y -this->tileHeight , this->origin.z);
     }
     this->reloadVertexData();
-    this->setAbsVertices();
+    printf("\nFirst vertex x : %f , y: %f , z:%f",this->firstVertex.Position.x , this->firstVertex.Position.y ,this->firstVertex.Position.z);
+    printf("\nSecond vertex x : %f , y: %f , z:%f",this->secondVertex.Position.x , this->secondVertex.Position.y ,this->secondVertex.Position.z);
+    printf("\nThird vertex x : %f , y: %f , z:%f",this->thirdVertex.Position.x , this->thirdVertex.Position.y ,this->thirdVertex.Position.z);
+    printf("\nFourth vertex x : %f , y: %f , z:%f",this->fourthVertex.Position.x , this->fourthVertex.Position.y ,this->fourthVertex.Position.z);
+
+    //this->setAbsVertices();
 }
 
 void GLTile::setNeedsVertexData(bool needsData){
@@ -117,24 +124,6 @@ void GLTile::reloadVertexData(){
     this->setNeedsVertexData(0);
 }
 
-void GLTile::setAbsVertices(){
-    if(!this->vertices.empty()){
-        this->absVertices.resize(this->vertices.size());
-        for(int i =0;i<this->vertices.size();i++){
-            NormPosition nPos;
-            nPos.x = this->vertices.at(i).Position.x;
-            nPos.y = this->vertices.at(i).Position.y;
-            nPos.z = this->vertices.at(i).Position.z;
-            AbsPosition aPos;
-            aPos = getAbsPosition(nPos);
-            this->absVertices.at(i).Position.x = aPos.x;
-            this->absVertices.at(i).Position.y = (SCREEN_RIGHTBOUNDS*aPos.y)/SCREEN_TOPBOUNDS;
-            this->absVertices.at(i).Position.z = aPos.z;
-            this->absVertices.at(i).Color = this->vertices.at(i).Color;
-        }
-        
-    }
-}
 
 
 GLTile::~GLTile(){
